@@ -1,0 +1,532 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Nov 17 16:10:49 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> selet * from data;
+SP2-0734: unknown command beginning "selet * fr..." - rest of line ignored.
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Venkata Rao     Hyderabad
+Nuthan          Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+
+10 rows selected.
+
+SQL> insert into data values('Divya','Vijayawada');
+
+1 row created.
+
+SQL> insert into data values('Punarvika','Vizag');
+
+1 row created.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Venkata Rao     Hyderabad
+Nuthan          Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+Divya           Vijayawada
+
+NAME            PLACE
+--------------- ---------------
+Punarvika       Vizag
+
+12 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> update data set name='Nuthan Kumar' where name='Nuthan';
+
+1 row updated.
+
+SQL> delete from data where place='Hyderabad';
+
+2 rows deleted.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Nuthan Kumar    Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+Divya           Vijayawada
+Punarvika       Vizag
+
+10 rows selected.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Venkata Rao     Hyderabad
+Nuthan          Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+Divya           Vijayawada
+
+NAME            PLACE
+--------------- ---------------
+Punarvika       Vizag
+
+12 rows selected.
+
+SQL> savepoint a;
+
+Savepoint created.
+
+SQL> update data set name='Nuthan Kumar' where name='Nuthan';
+
+1 row updated.
+
+SQL> delete from data where place='Kerala';
+
+1 row deleted.
+
+SQL> savepoint b;
+
+Savepoint created.
+
+SQL> delete from data where place='Hyderabad';
+
+2 rows deleted.
+
+SQL> savepoint c;
+
+Savepoint created.
+
+SQL> update data set place='Visakhapatnam' where place='Vizag';
+
+4 rows updated.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Ravi            Chennai
+Ram             Visakhapatnam
+Tejesh          Visakhapatnam
+Nuthan Kumar    Visakhapatnam
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Divya           Vijayawada
+Punarvika       Visakhapatnam
+
+9 rows selected.
+
+SQL> rollback to c;
+
+Rollback complete.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Nuthan Kumar    Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Divya           Vijayawada
+Punarvika       Vizag
+
+9 rows selected.
+
+SQL> rollback to a;
+
+Rollback complete.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Venkata Rao     Hyderabad
+Nuthan          Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+Divya           Vijayawada
+
+NAME            PLACE
+--------------- ---------------
+Punarvika       Vizag
+
+12 rows selected.
+
+SQL> set autocommit on;
+SQL> update data set place='Visakhapatnam' where place='Vizag';
+
+4 rows updated.
+
+Commit complete.
+SQL> set autocommit of;
+SP2-0158: unknown SET autocommit option "of"
+Usage: SET AUTO[COMMIT] { OFF | ON | IMM[EDIATE] | n }
+SQL> set autocommit off;
+SQL> update data set name='Tejesh Kumar' where name='Tejesh';
+
+1 row updated.
+
+SQL> set transaction read only;
+set transaction read only
+*
+ERROR at line 1:
+ORA-01453: SET TRANSACTION must be first statement of transaction
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set transaction read only;
+
+Transaction set.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Visakhapatnam
+Tejesh Kumar    Visakhapatnam
+Venkata Rao     Hyderabad
+Nuthan          Visakhapatnam
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+Divya           Vijayawada
+
+NAME            PLACE
+--------------- ---------------
+Punarvika       Visakhapatnam
+
+12 rows selected.
+
+SQL> update data set name='Tejesh Kumar' where name='Tejesh';
+update data set name='Tejesh Kumar' where name='Tejesh'
+       *
+ERROR at line 1:
+ORA-01456: may not perform insert/delete/update operation inside a READ ONLY
+transaction
+
+
+SQL> set transaction read write;
+set transaction read write
+*
+ERROR at line 1:
+ORA-01453: SET TRANSACTION must be first statement of transaction
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> set transaction read write;
+
+Transaction set.
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Visakhapatnam
+Tejesh Kumar    Visakhapatnam
+Venkata Rao     Hyderabad
+Nuthan          Visakhapatnam
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+Divya           Vijayawada
+
+NAME            PLACE
+--------------- ---------------
+Punarvika       Visakhapatnam
+
+12 rows selected.
+
+SQL> update data set name='Tejesh Kumar' where name='Tejesh';
+
+0 rows updated.
+
+SQL> create table sample(sno number(3),name varchar2(20) not null,place varchar2(15) not null);
+create table sample(sno number(3),name varchar2(20) not null,place varchar2(15) not null)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table samp(sno number(3),name varchar2(20) not null,place varchar2(15) not null);
+
+Table created.
+
+SQL> insert into samp values(1,'Ravi','Hyderabad');
+
+1 row created.
+
+SQL> insert into samp(sno,name) values(2,'Raju');
+insert into samp(sno,name) values(2,'Raju')
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."SAMP"."PLACE")
+
+
+SQL> insert into samp(name,place) values('Raju','Chennai');
+
+1 row created.
+
+SQL> desc samp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ PLACE                                     NOT NULL VARCHAR2(15)
+
+SQL> alter table samp add age number(3);
+
+Table altered.
+
+SQL> desc samp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ PLACE                                     NOT NULL VARCHAR2(15)
+ AGE                                                NUMBER(3)
+
+SQL> alter table add constraint ck_1 check(age>=18);
+alter table add constraint ck_1 check(age>=18)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> alter table samp add constraint ck_1 check(age>=18);
+
+Table altered.
+
+SQL> desc samp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(3)
+ NAME                                      NOT NULL VARCHAR2(20)
+ PLACE                                     NOT NULL VARCHAR2(15)
+ AGE                                                NUMBER(3)
+
+SQL> insert into samp values(3,'Bhanu','Hyderabad',35);
+
+1 row created.
+
+SQL> insert into samp values(4,'Devi','Vizag',15);
+insert into samp values(4,'Devi','Vizag',15)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.CK_1) violated
+
+
+SQL> select * from samp;
+
+       SNO NAME                 PLACE                  AGE
+---------- -------------------- --------------- ----------
+         1 Ravi                 Hyderabad
+           Raju                 Chennai
+         3 Bhanu                Hyderabad               35
+
+SQL> alter table samp disable constraint ck_1;
+
+Table altered.
+
+SQL> insert into samp values(4,'Devi','Vizag',15);
+
+1 row created.
+
+SQL> insert into samp values(5,'Usha','Pasala',17);
+
+1 row created.
+
+SQL> alter table samp enable constraint ck_1;
+alter table samp enable constraint ck_1
+                                   *
+ERROR at line 1:
+ORA-02293: cannot validate (SYSTEM.CK_1) - check constraint violated
+
+SQL> update samp set age=25 where sno in(4,5);
+
+2 rows updated.
+
+SQL> alter table samp enable constraint ck_1;
+
+Table altered.
+
+SQL> insert into samp values(5,'Usha','Pasala',17);
+insert into samp values(5,'Usha','Pasala',17)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.CK_1) violated
+
+
+SQL> alter table samp drop constraint ck_1;
+
+Table altered.
+
+SQL> insert into samp values(6,'Usha Rani','Pasala',17);
+
+1 row created.
+
+SQL> select * from samp;
+
+       SNO NAME                 PLACE                  AGE
+---------- -------------------- --------------- ----------
+         1 Ravi                 Hyderabad
+           Raju                 Chennai
+         3 Bhanu                Hyderabad               35
+         4 Devi                 Vizag                   25
+         5 Usha                 Pasala                  25
+         6 Usha Rani            Pasala                  17
+
+6 rows selected.
+
+SQL> alter table samp add state varchar2(10) default 'AP';
+
+Table altered.
+
+SQL> select * from samp;
+
+       SNO NAME                 PLACE                  AGE STATE
+---------- -------------------- --------------- ---------- ----------
+         1 Ravi                 Hyderabad                  AP
+           Raju                 Chennai                    AP
+         3 Bhanu                Hyderabad               35 AP
+         4 Devi                 Vizag                   25 AP
+         5 Usha                 Pasala                  25 AP
+         6 Usha Rani            Pasala                  17 AP
+
+6 rows selected.
+
+SQL> insert into samp(sno,name,place) values (6,'Rani','Hyderabad');
+
+1 row created.
+
+SQL> select * from samp;
+
+       SNO NAME                 PLACE                  AGE STATE
+---------- -------------------- --------------- ---------- ----------
+         1 Ravi                 Hyderabad                  AP
+           Raju                 Chennai                    AP
+         3 Bhanu                Hyderabad               35 AP
+         4 Devi                 Vizag                   25 AP
+         5 Usha                 Pasala                  25 AP
+         6 Usha Rani            Pasala                  17 AP
+         6 Rani                 Hyderabad                  AP
+
+7 rows selected.
+
+SQL> insert into samp(sno,name,place,state) values (7,'Jyothi','Chennai','TN');
+
+1 row created.
+
+SQL> select * from samp;
+
+       SNO NAME                 PLACE                  AGE STATE
+---------- -------------------- --------------- ---------- ----------
+         1 Ravi                 Hyderabad                  AP
+           Raju                 Chennai                    AP
+         3 Bhanu                Hyderabad               35 AP
+         4 Devi                 Vizag                   25 AP
+         5 Usha                 Pasala                  25 AP
+         6 Usha Rani            Pasala                  17 AP
+         6 Rani                 Hyderabad                  AP
+         7 Jyothi               Chennai                    TN
+
+8 rows selected.
+
+SQL> alter table samp add constraint uk_1 unique (sno);
+alter table samp add constraint uk_1 unique (sno)
+                                *
+ERROR at line 1:
+ORA-02299: cannot validate (SYSTEM.UK_1) - duplicate keys found
+
+
+SQL> select * from samp;
+
+       SNO NAME                 PLACE                  AGE STATE
+---------- -------------------- --------------- ---------- ----------
+         1 Ravi                 Hyderabad                  AP
+           Raju                 Chennai                    AP
+         3 Bhanu                Hyderabad               35 AP
+         4 Devi                 Vizag                   25 AP
+         5 Usha                 Pasala                  25 AP
+         6 Usha Rani            Pasala                  17 AP
+         6 Rani                 Hyderabad                  AP
+         7 Jyothi               Chennai                    TN
+
+8 rows selected.
+
+SQL> update samp set sno=8 where name='Rani';
+
+1 row updated.
+
+SQL> alter table samp add constraint uk_1 unique (sno);
+
+Table altered.
+
+SQL> insert into samp(sno,name,place,state) values (7,'Jyothi','Chennai','TN');
+insert into samp(sno,name,place,state) values (7,'Jyothi','Chennai','TN')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.UK_1) violated
+
+
+SQL>

@@ -1,0 +1,389 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Nov 13 16:25:51 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: System
+Enter password:
+Connected.
+SQL> create table sql45(sno int,name char(20),dob date,salary number(7,2),place varchar2(25));
+
+Table created.
+
+SQL> desc sql45;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(38)
+ NAME                                               CHAR(20)
+ DOB                                                DATE
+ SALARY                                             NUMBER(7,2)
+ PLACE                                              VARCHAR2(25)
+
+SQL> insert into sql45 values(101,'Vinod','10-may-1998',15000,'Hyderabad');
+
+1 row created.
+
+SQL> insert into sql45 values(102,'Nuthan','20-aug-1999',18000.45,'Vizag');
+
+1 row created.
+
+SQL> insert into sql45(sno,name,salary) values(103,'Sai',15040.85);
+
+1 row created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai                              15040.85
+
+SQL> update sql45 set dob='15-oct-2001' where sno=103;
+
+1 row updated.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai                  15-OCT-01   15040.85
+
+SQL> update sql45 set name='Sai Kumar',place='Chennai' where sno=103;
+
+1 row updated.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+
+SQL> delete from sql45 where sno=102;
+
+1 row deleted.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+
+SQL> delete from sql45;
+
+2 rows deleted.
+
+SQL> select * from sql45;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+
+SQL>  insert into sql45 values(102,'Nuthan','20-aug-1999',18000.45,'Vizag');
+
+1 row created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+
+SQL> insert into sql45 values(&sno,'&name','&dob',&salary,'&place');
+Enter value for sno: 104
+Enter value for name: Rani
+Enter value for dob: 10-oct-2003
+Enter value for salary: null
+Enter value for place: Hyderabad
+old   1: insert into sql45 values(&sno,'&name','&dob',&salary,'&place')
+new   1: insert into sql45 values(104,'Rani','10-oct-2003',null,'Hyderabad')
+
+1 row created.
+
+SQL> /
+Enter value for sno: 105
+Enter value for name: Vani
+Enter value for dob: null
+Enter value for salary: 16000
+Enter value for place: null
+old   1: insert into sql45 values(&sno,'&name','&dob',&salary,'&place')
+new   1: insert into sql45 values(105,'Vani','null',16000,'null')
+insert into sql45 values(105,'Vani','null',16000,'null')
+                                    *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected
+
+
+SQL> /
+Enter value for sno: 105
+Enter value for name: Vani
+Enter value for dob: 15-jan-1998
+Enter value for salary: 16000
+Enter value for place: null
+old   1: insert into sql45 values(&sno,'&name','&dob',&salary,'&place')
+new   1: insert into sql45 values(105,'Vani','15-jan-1998',16000,'null')
+
+1 row created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+
+SQL> /
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+
+SQL> insert all
+  2  into sql45(sno,name,place,salary) values (106,'Kiran','Hyderabad',14000)
+  3  into sql45(sno,name,place) values (107,'Ravi','Vizag')
+  4  into sql45 values (108,'Tejesh','10-sep-1994',38500.45,'Vizag')
+  5  select * from dual;
+
+3 rows created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+       106 Kiran                               14000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   38500.45 Vizag
+
+8 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert all
+  2  into sql45(sno,name,place,salary) values (106,'Kiran','Hyderabad',14000)
+  3
+SQL> insert all
+  2  into sql45(sno,name,place,salary) values (106,'Kiran','Hyderabad',14000)
+  3  into sql45(sno,name,place) values (107,'Ravi','Vizag')
+  4  select * from sql45;
+
+16 rows created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+       106 Kiran                               14000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   38500.45 Vizag
+       106 Kiran                               14000 Hyderabad
+       106 Kiran                               14000 Hyderabad
+       106 Kiran                               14000 Hyderabad
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       106 Kiran                               14000 Hyderabad
+       106 Kiran                               14000 Hyderabad
+       106 Kiran                               14000 Hyderabad
+       106 Kiran                               14000 Hyderabad
+       106 Kiran                               14000 Hyderabad
+       107 Ravi                                      Vizag
+       107 Ravi                                      Vizag
+       107 Ravi                                      Vizag
+       107 Ravi                                      Vizag
+       107 Ravi                                      Vizag
+       107 Ravi                                      Vizag
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       107 Ravi                                      Vizag
+       107 Ravi                                      Vizag
+
+24 rows selected.
+
+SQL> desc dual;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DUMMY                                              VARCHAR2(1)
+
+SQL> select * from dual;
+
+D
+-
+X
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+       106 Kiran                               14000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   38500.45 Vizag
+
+8 rows selected.
+
+SQL> create table data(name varchar(20),place varchar2(20));
+
+Table created.
+
+SQL> desc data;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ PLACE                                              VARCHAR2(20)
+
+
+SQL> insert all
+  2  into sql45 values (109,'Venkata Rao','04-jun-1966',75500.45,'Vizag')
+  3  into sql45(name,salary,place,dob,sno) values ('Dhana Lakshmi',5000,'Vizag','11-nov-1975',110)
+  4  into data values ('Vinod','Hyderabad')
+  5  into data values ('Nuthan','Vizag')
+  6  select * from dual;
+
+4 rows created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+       106 Kiran                               14000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   38500.45 Vizag
+       109 Venkata Rao          04-JUN-66   75500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       5000 Vizag
+
+10 rows selected.
+
+SQL> select * from data;
+
+NAME                 PLACE
+-------------------- --------------------
+Vinod                Hyderabad
+Nuthan               Vizag
+
+SQL> desc data;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ PLACE                                              VARCHAR2(20)
+
+SQL> alter table data add age number(3);
+
+Table altered.
+
+SQL> desc data;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ PLACE                                              VARCHAR2(20)
+ AGE                                                NUMBER(3)
+
+SQL> alter table data add (phone_number number(10),email varchar2(20));
+
+Table altered.
+
+SQL> desc data;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ PLACE                                              VARCHAR2(20)
+ AGE                                                NUMBER(3)
+ PHONE_NUMBER                                       NUMBER(10)
+ EMAIL                                              VARCHAR2(20)
+
+SQL> select * from data;
+
+NAME                 PLACE                       AGE PHONE_NUMBER
+-------------------- -------------------- ---------- ------------
+EMAIL
+--------------------
+Vinod                Hyderabad
+
+
+Nuthan               Vizag
+
+
+
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from data;
+
+NAME                 PLACE                       AGE PHONE_NUMBER EMAIL
+-------------------- -------------------- ---------- ------------ --------------------
+Vinod                Hyderabad
+Nuthan               Vizag
+
+SQL> desc data;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ NAME                                                                                         VARCHAR2(20)
+ PLACE                                                                                        VARCHAR2(20)
+ AGE                                                                                          NUMBER(3)
+ PHONE_NUMBER                                                                                 NUMBER(10)
+ EMAIL                                                                                        VARCHAR2(20)
+
+SQL>

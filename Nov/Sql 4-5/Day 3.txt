@@ -1,0 +1,709 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sat Nov 15 16:15:18 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> select 10+20 from dual;
+
+     10+20
+----------
+        30
+
+SQL> select 11-5 from dual;
+
+      11-5
+----------
+         6
+
+SQL> select 11*5 from dual;
+
+      11*5
+----------
+        55
+
+SQL> select 11/5 from dual;
+
+      11/5
+----------
+       2.2
+
+SQL> select 11%5 from dual;
+select 11%5 from dual
+         *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SQL> select mod(11,5) from dual;
+
+ MOD(11,5)
+----------
+         1
+
+SQL> select * from data;
+
+NAME            PLACE
+--------------- ---------------
+Raju            Hyderabad
+Ravi            Chennai
+Ram             Vizag
+Tejesh          Vizag
+Venkata Rao     Hyderabad
+Nuthan          Vizag
+Ramya           Banglore
+Sravani         Chennai
+Hema Ganesh     Banglore
+Pavan Kalyan    Kerala
+
+10 rows selected.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      15000 Hyderabad
+       102 Nuthan               20-AUG-99   18000.45 Vizag
+       103 Sai Kumar            15-OCT-01   15040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      16000 null
+       106 Kiran                               14000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   38500.45 Vizag
+       109 Venkata Rao          04-JUN-66   75500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       5000 Vizag
+
+10 rows selected.
+
+SQL> update sql45 set salary=salary+1000;
+
+10 rows updated.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+10 rows selected.
+
+SQL> select salary,salary+2000 from dual;
+select salary,salary+2000 from dual
+              *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier
+
+
+SQL> select salary,salary+2000 from sql45;
+
+    SALARY SALARY+2000
+---------- -----------
+     16000       18000
+  19000.45    21000.45
+  16040.85    18040.85
+
+     17000       19000
+     15000       17000
+
+  39500.45    41500.45
+  76500.45    78500.45
+      6000        8000
+
+10 rows selected.
+
+SQL> select sum(salary) from sql45;
+
+SUM(SALARY)
+-----------
+   205042.2
+
+SQL> select sum(salary+2000) from sql45;
+
+SUM(SALARY+2000)
+----------------
+        221042.2
+
+SQL> select * from sql45 where salary=19000;
+
+no rows selected
+
+SQL> select * from sql45 where salary=18000;
+
+no rows selected
+
+SQL> select * from sql45 where salary=17000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       105 Vani                 15-JAN-98      17000 null
+
+SQL> select * from sql45 where salary=15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where salary!=15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45 where salary<>15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45 where salary>15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+6 rows selected.
+
+SQL> select * from sql45 where salary>=15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45 where salary<15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where salary<=15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       106 Kiran                               15000 Hyderabad
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where salary=15000 and salary=20000;
+
+no rows selected
+
+SQL> select * from sql45 where salary>=15000 and salary<=20000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where salary>=15000 or salary<=20000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+8 rows selected.
+
+SQL> select * from sql45 where not salary>=15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where not salary<=15000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+6 rows selected.
+
+SQL> select * from sql45 where salary in(15000,16000,18000,25000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where salary not in(15000,16000,18000,25000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+6 rows selected.
+
+SQL> select * from sql45 where salary=any(15000,16000,18000,25000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where salary=15000 between 20000;
+select * from sql45 where salary=15000 between 20000
+                                       *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from sql45 where salary between 15000 and 20000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where salary between 1500 and 10000;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where salary=some(17000,16000,18000,25000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+
+SQL> select * from sql45 where salary=all(17000,16000,18000,25000);
+
+no rows selected
+
+SQL> select * from sql45 where salary=all(17000,16000,18000,24000);
+
+no rows selected
+
+SQL> select * from sql45 where salary=all(17000,16000,18000,20000);
+
+no rows selected
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+10 rows selected.
+
+SQL> select * from sql45 where salary=all(7000,10000,12000,15000);
+
+no rows selected
+
+SQL> select * from sql45 where salary>=all(7000,10000,12000,15000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45 where salary>=some(7000,10000,12000,15000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45 where salary=some(7000,10000,12000,15000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where salary>=some(7000,10000,12000,15000,25000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45 where salary>=all(7000,10000,12000,15000,25000);
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+SQL> select * from sql45 where salary is null;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       104 Rani                 10-OCT-03            Hyderabad
+       107 Ravi                                      Vizag
+
+SQL> select * from sql45 where salary is not null;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+8 rows selected.
+
+SQL> select * from sql45 where name like '%n';
+
+no rows selected
+
+SQL> select * from sql45 where name like '%N';
+
+no rows selected
+
+SQL> select * from sql45 where name like 'N%';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+
+
+SQL> select * from sql45 where name like 'V%';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+
+SQL> select * from sql45 where name like '%o';
+
+no rows selected
+
+SQL> select * from sql45 where name like '_u%';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+
+SQL> select * from sql45 where name like '_i%';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       106 Kiran                               15000 Hyderabad
+
+SQL> desc sql45;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(38)
+ NAME                                               CHAR(20)
+ DOB                                                DATE
+ SALARY                                             NUMBER(7,2)
+ PLACE                                              VARCHAR2(25)
+
+SQL> select * from sql45 where place like '%d';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       104 Rani                 10-OCT-03            Hyderabad
+       106 Kiran                               15000 Hyderabad
+
+SQL> select * from sql45 where place like '%i';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+
+SQL> select * from sql45 where place like '%z';
+
+no rows selected
+
+SQL> select * from sql45 where place like '%m';
+
+no rows selected
+
+SQL> select * from sql45 where place like '%g';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where place like 'C%i';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+
+SQL> select * from sql45 where place like '_h%a_';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+
+SQL> select * from sql45 where place like '%z__';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where place like '__z__';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> select * from sql45 where place like '__a__';
+
+no rows selected
+
+SQL> select * from sql45 where place like '___a_';
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+SQL> create table sql as select * from sql45;
+
+Table created.
+
+SQL> desc sql;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SNO                                                NUMBER(38)
+ NAME                                               CHAR(20)
+ DOB                                                DATE
+ SALARY                                             NUMBER(7,2)
+ PLACE                                              VARCHAR2(25)
+
+SQL> select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+10 rows selected.
+
+SQL> delete from sql where dob is null;
+
+2 rows deleted.
+
+SQL> select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+8 rows selected.
+
+SQL> delete from sql where salary is null;
+
+1 row deleted.
+
+SQL> select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45
+  2  union
+  3  select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+10 rows selected.
+
+SQL> select * from sql45
+  2  union all
+  3  select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+       101 Vinod                10-MAY-98      16000 Hyderabad
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+17 rows selected.
+
+SQL> select * from sql45
+  2  intersect
+  3  select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       105 Vani                 15-JAN-98      17000 null
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+7 rows selected.
+
+SQL> select * from sql45
+  2  minus
+  3  select * from sql;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       104 Rani                 10-OCT-03            Hyderabad
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+
+SQL>

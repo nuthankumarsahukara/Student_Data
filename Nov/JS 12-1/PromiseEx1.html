@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise Example</title>
+  </head>
+  <body>
+    <h1>Promise Example</h1>
+    <h3>To Check Output Open The Console Terminal</h3>
+    <script>
+      function walkdog() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let resultDog="true";
+            if(resultDog)
+                resolve("You walk the dog");
+            else
+                reject('Walking Dog Task Is not done...');
+          }, 1500);
+        });
+      }
+
+      function cleanKitchen() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let resultKitchen=false;
+            if(resultKitchen)
+                resolve("You clean the Kitchen");
+            else    
+                reject("Kitchen Task is not done")
+          }, 5000);
+        });
+      }
+
+      function takeOutTrash() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let resultTrash=true;
+            if(resultTrash)
+                resolve("You taken out the trash");
+            else
+                reject('Trash Task is not done');
+          }, 500);
+        });
+      }
+
+      walkdog().then(value =>{console.log(value); return cleanKitchen()})
+                .then(value =>{console.log(value);return takeOutTrash()})
+                .then(value =>{console.log(value);console.log('You finish all the tasks')})
+    </script>
+  </body>
+</html>

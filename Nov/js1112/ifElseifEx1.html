@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<title>If Else If Example</title>
+</head>
+<body>
+<p id="para"></p>
+<script>
+	let no1=+(prompt('Enter the number 1 to check biggest number:'));
+	let no2=+(prompt('Enter the number 2 to check biggest number:'));
+	let no3=+(prompt('Enter the number 3 to check biggest number:'));
+	let no4=+(prompt('Enter the number 4 to check biggest number:'));
+	if(no1>no2 && no1>no3 && no1>no4)
+		document.getElementById('para').innerHTML= no1+' is a biggest number among the '+no1+' ' +no2+ ' '+no3+' '+no4;
+	else if(no2>no3 && no2>no4)
+		document.getElementById('para').innerHTML= no2+' is a biggest number among the '+no1+' ' +no2+ ' '+no3+' '+no4;
+	else if(no3>no4)
+		document.getElementById('para').innerHTML= no3+' is a biggest number among the '+no1+' ' +no2+ ' '+no3+' '+no4;
+	else
+		document.getElementById('para').innerHTML= no4+' is a biggest number among the '+no1+' ' +no2+ ' '+no3+' '+no4;
+</script>
+</body>
+</html>
+
+

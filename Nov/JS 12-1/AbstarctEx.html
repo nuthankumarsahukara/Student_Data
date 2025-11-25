@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abstract Example</title>
+  </head>
+  <body>
+    <script>
+      class Car {
+        constructor(make, model) {
+          this.make = make;
+          this.model = model;
+        }
+
+        // Abstract method
+        start() {
+          throw new Error("This method must be implemented by the subclass");
+        }
+        //Normal method
+        drive() {
+          document.writeln("Driving the car... <br/>");
+        }
+      }
+
+      class ElectricCar extends Car {
+        start() {
+          document.writeln("Starting the electric car... <br/>");
+        }
+      }
+
+      class PertolCar extends Car {
+        start() {
+          document.writeln("Starting the pertol car... <br/>");
+        }
+      }
+
+      class DiselCar extends Car {
+        start() {
+          document.writeln("Starting the disel car... <br/>");
+        }
+      }
+
+      const electricCar = new ElectricCar("Tesla", "Model 3");
+      electricCar.start(); // Starting the electric car...
+      electricCar.drive(); // Driving the car...
+
+       const pertolCar = new PertolCar("Honda", "City");
+       pertolCar.start();
+       pertolCar.drive();
+
+       const diselCar=new DiselCar('Tata','Altrolz');
+       diselCar.start();
+       diselCar.drive();
+
+       const car=new Car();
+       car.start();
+
+    </script>
+  </body>
+</html>

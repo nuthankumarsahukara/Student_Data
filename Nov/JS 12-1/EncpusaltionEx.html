@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>To Check Output Open The Console Terminal</h3>
+    <script>
+        class Person{
+            constructor(Name,Place){
+                let _Name=Name;
+                let _Place=Place;
+
+                this.getName=function (){
+                return _Name;
+                }
+
+                this.getPlace=function (){
+                return _Place;
+                }
+
+                this.setName=function(Name){
+                    _Name=Name;
+                }
+
+                this.setPlace=function(Place){
+                    _Place=Place;
+                }
+            }
+        }
+
+    </script>
+
+    <script>
+        let person1=new Person();
+        person1.setName('Nuthan');
+        person1.setPlace('Vizag');
+
+        console.log("Name :"+person1.getName());
+        console.log("Place :"+person1.getPlace());
+
+
+
+        let person2=new Person();
+        person2.setName('Vinod');
+        person2.setPlace('Hyderabad');
+
+        document.write("Name :"+person2.getName()+'<br/>');
+        document.write("Place :"+person2.getPlace()+'<br/>');
+
+    </script>
+</body>
+</html>

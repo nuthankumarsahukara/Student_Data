@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+<title>Var Scope Example</title>
+</head>
+<body>
+<script>
+var a=10;
+document.write("The value of a (Global Variable) is "+a+"<br/>");
+{
+	var a=25;
+	document.write("The value of a (Local Variable) is "+a+"<br/>");
+}
+document.write("The value of a (Global Variable) is "+a+"<br/>");
+</script>
+</body>
+</html>

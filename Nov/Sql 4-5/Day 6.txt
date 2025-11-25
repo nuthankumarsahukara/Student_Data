@@ -1,0 +1,735 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Fri Nov 21 16:44:18 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: System
+Enter password:
+Connected.
+SQL> select regexp_replace('datapro is a great resource','^(\S*)','Datapro') from dual;
+
+REGEXP_REPLACE('DATAPROISAG
+---------------------------
+Datapro is a great resource
+
+SQL> select regexp_replace('datapro is a great resource','^(\s*)','Datapro') from dual;
+
+REGEXP_REPLACE('DATAPROISAGREATRES
+----------------------------------
+Dataprodatapro is a great resource
+
+SQL> select regexp_replace('123datapro is a great123 resource','\d','*') from dual;
+
+REGEXP_REPLACE('123DATAPROISAGREA
+---------------------------------
+***datapro is a great*** resource
+
+SQL> select regexp_replace('Anderson','a|i|e|o|u','*') from dual;
+
+REGEXP_R
+--------
+And*rs*n
+
+SQL> select regexp_substr('datapro is a great resource','(\S*)(\s)') from dual;
+
+REGEXP_S
+--------
+datapro
+
+SQL> select regexp_substr('datapro is a great resource','(\S*)') from dual;
+
+REGEXP_
+-------
+datapro
+
+SQL> select regexp_substr('datapro is a great resource','(\s)') from dual;
+
+R
+-
+
+
+SQL> select ascii('a') from dual;
+
+ASCII('A')
+----------
+        97
+
+SQL>
+SQL> select ascii('A') from dual;
+
+ASCII('A')
+----------
+        65
+
+SQL>
+SQL> select asciistr(' A B C Ä È') from dual;
+
+ASCIISTR('ABCÄ
+--------------
+ A B C \017D E
+
+SQL>
+SQL> select chr(65) from dual;
+
+C
+-
+A
+
+SQL> select compose ('0' || unistr('\0308')) from dual;
+
+CO
+--
+0¿
+
+SQL> select concat('hello ',' world') from dual;
+
+CONCAT('HELL
+------------
+hello  world
+
+SQL> select concat('Good Evening ',name) from data;
+
+CONCAT('GOODEVENING',NAME)
+----------------------------
+Good Evening Raju
+Good Evening Ravi
+Good Evening Ram
+Good Evening Tejesh Kumar
+Good Evening Venkata Rao
+Good Evening Nuthan
+Good Evening Ramya
+Good Evening Sravani
+Good Evening Hema Ganesh
+Good Evening Pavan Kalyan
+Good Evening Divya
+Good Evening Punarvika
+
+12 rows selected.
+
+SQL> select convert('A V C D E Ä È Ù Ö Ø' ,'US7ASCII','WE8ISO8859P1')from dual;
+
+CONVERT('AVCDEÄEUÖO','
+----------------------
+A V C D E ?? E U a?? O
+
+SQL>
+SQL> select dump('Tech') from dual;
+
+DUMP('TECH')
+---------------------------
+Typ=96 Len=4: 84,101,99,104
+
+SQL>
+SQL> select dump('tech',16) from dual;
+
+DUMP('TECH',16)
+-------------------------
+Typ=96 Len=4: 74,65,63,68
+
+SQL>
+SQL> select initcap('data pro') from dual;
+
+INITCAP(
+--------
+Data Pro
+
+SQL>
+SQL> select instr('datapro','a') from dual;
+
+INSTR('DATAPRO','A')
+--------------------
+                   2
+
+SQL>
+SQL> select instr('datapro','a',3) from dual;
+
+INSTR('DATAPRO','A',3)
+----------------------
+                     4
+
+SQL>
+SQL> select instr('datapro','a',3,2) from dual;
+
+INSTR('DATAPRO','A',3,2)
+------------------------
+                       0
+
+SQL>
+SQL> select length('datapro') from dual;
+
+LENGTH('DATAPRO')
+-----------------
+                7
+
+SQL>
+SQL> select lpad('hello',10) from dual;
+
+LPAD('HELL
+----------
+     hello
+
+SQL> select lpad ('hello',10,'@') from dual;
+
+LPAD('HELL
+----------
+@@@@@hello
+
+SQL>
+SQL> select ltrim('                 dataprop')from dual;
+
+LTRIM('D
+--------
+dataprop
+
+SQL> select ltrim('xyxyxyxzzzTech', 'xyz') from dual;
+
+LTRI
+----
+Tech
+
+SQL> select replace('123123tech','123')from dual;
+
+REPL
+----
+tech
+
+SQL>
+SQL> select replace('123123tech','1','3')from dual;
+
+REPLACE('1
+----------
+323323tech
+
+SQL>
+SQL> select rpad('tech',8,'0') from dual;
+
+RPAD('TE
+--------
+tech0000
+
+SQL>
+SQL> select rtrim('123000','0') from dual;
+
+RTR
+---
+123
+
+SQL>
+SQL> select soundex('apples') from dual;
+
+SOUN
+----
+A142
+
+SQL> select substr('this is a test',6,2) from dual;
+
+SU
+--
+is
+
+SQL>
+SQL> select translate('1tech23','123','456') from dual;
+
+TRANSLA
+-------
+4tech56
+
+SQL>
+SQL> select trim('          hello             ')from daul;
+select trim('          hello             ')from dual
+                                                *
+TRIM
+------
+hello
+
+SQL> select trim(trailing '1' from 'tech1') from dual;
+
+TRIM
+----
+tech
+
+SQL>
+SQL> select trim(leading '1' from '1tech') from dual;
+
+TRIM
+----
+tech
+
+SQL>
+SQL> select trim(both '1' from '1tech1') from dual;
+
+TRIM
+----
+tech
+
+SQL>
+SQL> select upper('datapro') from dual;
+
+UPPER('
+-------
+DATAPRO
+
+SQL>
+SQL> select vsize('hello world') from dual;
+
+VSIZE('HELLOWORLD')
+-------------------
+                 11
+
+SQL>
+SQL> select regexp_instr('Nuthan','n') from dual;
+
+REGEXP_INSTR('NUTHAN','N')
+--------------------------
+                         6
+
+SQL>
+SQL> select regexp_instr('Nuthan learning systems','e',15) from dual;
+
+REGEXP_INSTR('NUTHANLEARNINGSYSTEMS','E',15)
+--------------------------------------------
+                                          21
+
+SQL>
+SQL> select regexp_instr('Nuthan learning systems','e',1,2) from dual;
+
+REGEXP_INSTR('NUTHANLEARNINGSYSTEMS','E',1,2)
+---------------------------------------------
+                                           21
+
+SQL>
+SQL> select regexp_instr('datapro','a|i|e|o|u') from dual;
+
+REGEXP_INSTR('DATAPRO','A|I|E|O|U')
+-----------------------------------
+                                  2
+
+SQL>
+SQL> select regexp_instr('Anderson','a|i|e|o|u',1,1,0,'i') from dual;
+
+REGEXP_INSTR('ANDERSON','A|I|E|O|U',1,1,0,'I')
+----------------------------------------------
+                                             1
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+21-NOV-25
+
+SQL> select systimestamp from dual;
+
+SYSTIMESTAMP
+---------------------------------------------------------------------------
+21-NOV-25 04.48.33.929000 PM +05:30
+
+SQL> select uid from dual;
+
+       UID
+----------
+         5
+
+SQL> select user from dual;
+
+USER
+------------------------------
+SYSTEM
+
+SQL> create sequence seq123
+  2  minvalue 1
+  3  maxvalue 100
+  4  start with 1
+  5  increment by 10
+  6  cycle
+  7  cache 3;
+
+Sequence created.
+
+SQL> select seq123.nextval from dual;
+
+   NEXTVAL
+----------
+         1
+
+SQL> select seq123.nextval from dual;
+
+   NEXTVAL
+----------
+        11
+
+SQL> /
+
+   NEXTVAL
+----------
+        21
+
+SQL>
+SQL> /
+
+   NEXTVAL
+----------
+        31
+
+SQL> /
+
+   NEXTVAL
+----------
+        41
+
+SQL> /
+
+   NEXTVAL
+----------
+        51
+
+SQL> /
+
+   NEXTVAL
+----------
+        61
+
+SQL> /
+
+   NEXTVAL
+----------
+        71
+
+SQL> /
+
+   NEXTVAL
+----------
+        81
+
+SQL> /
+
+   NEXTVAL
+----------
+        91
+
+SQL> /
+
+   NEXTVAL
+----------
+         1
+
+SQL> /
+
+   NEXTVAL
+----------
+        11
+
+SQL> /
+
+   NEXTVAL
+----------
+        21
+
+SQL> /
+
+   NEXTVAL
+----------
+        31
+
+SQL> /
+
+   NEXTVAL
+----------
+        41
+
+SQL> /
+
+   NEXTVAL
+----------
+        51
+
+SQL> /
+
+   NEXTVAL
+----------
+        61
+
+SQL> /
+
+   NEXTVAL
+----------
+        71
+
+SQL> /
+
+   NEXTVAL
+----------
+        81
+
+SQL> /
+
+   NEXTVAL
+----------
+        91
+
+SQL> /
+
+   NEXTVAL
+----------
+         1
+
+SQL> /
+
+   NEXTVAL
+----------
+        11
+
+SQL> /
+
+   NEXTVAL
+----------
+        21
+
+SQL> /
+
+   NEXTVAL
+----------
+        31
+
+SQL> /
+
+   NEXTVAL
+----------
+        41
+
+SQL> /
+
+   NEXTVAL
+----------
+        51
+
+SQL> /
+
+   NEXTVAL
+----------
+        61
+
+SQL> /
+
+   NEXTVAL
+----------
+        71
+
+SQL> /
+
+   NEXTVAL
+----------
+        81
+
+SQL> /
+
+   NEXTVAL
+----------
+        91
+
+SQL> /
+
+   NEXTVAL
+----------
+         1
+
+SQL> create sequence seq1234
+  2  minvalue 1
+  3  maxvalue 5
+  4  start with 1
+  5  increment by 1
+  6  cache 3;
+
+Sequence created.
+
+SQL> select seq1234.nextval from dual;
+
+   NEXTVAL
+----------
+         1
+
+SQL> /
+
+   NEXTVAL
+----------
+         2
+
+SQL>
+SQL> /
+
+   NEXTVAL
+----------
+         3
+
+SQL>
+SQL> /
+
+   NEXTVAL
+----------
+         4
+
+SQL> /
+
+   NEXTVAL
+----------
+         5
+
+SQL> /
+select seq1234.nextval from dual
+*
+ERROR at line 1:
+ORA-08004: sequence SEQ1234.NEXTVAL exceeds MAXVALUE and cannot be instantiated
+
+
+SQL> select seq123.nextval from dual;
+
+   NEXTVAL
+----------
+        11
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+
+10 rows selected.
+
+SQL> insert into sql45(sno,name) values (seq123.nextval,'Vinod');
+
+1 row created.
+
+SQL> select * from sql45;
+
+       SNO NAME                 DOB           SALARY PLACE
+---------- -------------------- --------- ---------- -------------------------
+       101 Vinod                10-MAY-98      16000 Hyderabad
+       102 Nuthan               20-AUG-99   19000.45 Vizag
+       103 Sai Kumar            15-OCT-01   16040.85 Chennai
+       104 Rani                 10-OCT-03            Hyderabad
+       105 Vani                 15-JAN-98      17000 null
+       106 Kiran                               15000 Hyderabad
+       107 Ravi                                      Vizag
+       108 Tejesh               10-SEP-94   39500.45 Vizag
+       109 Venkata Rao          04-JUN-66   76500.45 Vizag
+       110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+        21 Vinod
+
+11 rows selected.
+
+SQL> select seq123.currval from dual;
+
+   CURRVAL
+----------
+        21
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select rownum,sql45.* from sql45;
+
+    ROWNUM        SNO NAME                 DOB           SALARY PLACE
+---------- ---------- -------------------- --------- ---------- -------------------------
+         1        101 Vinod                10-MAY-98      16000 Hyderabad
+         2        102 Nuthan               20-AUG-99   19000.45 Vizag
+         3        103 Sai Kumar            15-OCT-01   16040.85 Chennai
+         4        104 Rani                 10-OCT-03            Hyderabad
+         5        105 Vani                 15-JAN-98      17000 null
+         6        106 Kiran                               15000 Hyderabad
+         7        107 Ravi                                      Vizag
+         8        108 Tejesh               10-SEP-94   39500.45 Vizag
+         9        109 Venkata Rao          04-JUN-66   76500.45 Vizag
+        10        110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+        11         21 Vinod
+
+11 rows selected.
+
+SQL> select rowid,sql45.* from sql45;
+
+ROWID                     SNO NAME                 DOB           SALARY PLACE
+------------------ ---------- -------------------- --------- ---------- -------------------------
+AAAE5cAABAAALCJAAA        101 Vinod                10-MAY-98      16000 Hyderabad
+AAAE5cAABAAALCJAAB        102 Nuthan               20-AUG-99   19000.45 Vizag
+AAAE5cAABAAALCJAAC        103 Sai Kumar            15-OCT-01   16040.85 Chennai
+AAAE5cAABAAALCJAAD        104 Rani                 10-OCT-03            Hyderabad
+AAAE5cAABAAALCJAAE        105 Vani                 15-JAN-98      17000 null
+AAAE5cAABAAALCJAAF        106 Kiran                               15000 Hyderabad
+AAAE5cAABAAALCJAAG        107 Ravi                                      Vizag
+AAAE5cAABAAALCJAAH        108 Tejesh               10-SEP-94   39500.45 Vizag
+AAAE5cAABAAALCJAAI        109 Venkata Rao          04-JUN-66   76500.45 Vizag
+AAAE5cAABAAALCJAAJ        110 Dhana Lakshmi        11-NOV-75       6000 Vizag
+AAAE5cAABAAALCJAAK         21 Vinod
+
+11 rows selected.
+
+SQL> SELECT SCN_TO_TIMESTAMP(ORA_ROWSCN) FROM sql45;
+
+SCN_TO_TIMESTAMP(ORA_ROWSCN)
+---------------------------------------------------------------------------
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+
+11 rows selected.
+
+SQL> insert into sql45(sno,name) values (seq123.nextval,'Ganesh');
+
+1 row created.
+
+SQL> SELECT SCN_TO_TIMESTAMP(ORA_ROWSCN) FROM sql45;
+
+SCN_TO_TIMESTAMP(ORA_ROWSCN)
+---------------------------------------------------------------------------
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+15-NOV-25 04.48.14.000000000 PM
+
+12 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> SELECT SCN_TO_TIMESTAMP(ORA_ROWSCN) FROM sql45;
+
+SCN_TO_TIMESTAMP(ORA_ROWSCN)
+---------------------------------------------------------------------------
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+21-NOV-25 04.59.40.000000000 PM
+
+12 rows selected.
+
+SQL>

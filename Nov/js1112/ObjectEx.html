@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<title>Object Example</title>
+</head>
+<body>
+<script>
+let person={
+name:"Vinod",
+job:'Software Developer',
+job_location : 'Hyderabad',
+salary:50000,
+"Home Town" : 'Vizag'
+}
+
+document.write("Person Name : "+person.name+"<br/>");
+document.write("Person Job : "+person.job+"<br/>");
+document.write("Person Job Location : "+person.job_location+"<br/>");
+document.write("Person Salary : "+person.salary+"<br/>");
+document.write("Person Home Town : "+person["Home Town"]+"<br/>");
+
+document.write('Object :'+JSON.stringify(person)+'<br/>');
+
+person.name="Vinod Kumar";
+person["home town"]="Visakhapatnam";
+document.write('Object :'+JSON.stringify(person)+'<br/>');
+
+
+Object.freeze(person); //(If you use the freeeze method we can't update the data).
+
+person.salary=80000;
+document.write('Object :'+JSON.stringify(person)+'<br/>');
+
+delete person.name;
+document.write('Object :'+JSON.stringify(person)+'<br/>');
+
+document.write("Keys :"+Object.keys(person)+'<br/>');
+
+document.write("Values :"+Object.values(person)+'<br/>');
+
+document.write("Entries :"+Object.entries(person)+'<br/>');
+
+</script>
+</body>
+</html>

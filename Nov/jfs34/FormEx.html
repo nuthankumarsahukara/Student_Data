@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<title>Form Example</title>
+</head>
+<body>
+<form method="post" action="https://www.datapro.in" name="application" target="_blank" autocomplete="off" <!--novalidate="novalidate"-->>
+<fieldset>
+<legend align="right">Student Application</legend><!-- align="left,center,right" -->
+<label>Name </label>
+<input type="text" name="name" value="nuthan" readonly disabled/><br/><br/>
+<label>Password </label>
+<input type="Password" name="password" placeholder="password" size='45' minlength=4 maxlength=8/><br/><br/>
+<label>Gender </label>
+<input type="radio" name="gender" value="male" checked/>Male
+<input type="radio" name="gender" value="female"/>Female<br/><br/>
+<label>Sports</label>
+<input type="checkbox" name="sports" value="cricket"/>Cricket
+<input type="checkbox" name="sports" value="football" checked/>FootBall
+<input type="checkbox" name="sports" value="hockey"/>Hockey <br/><br/>
+<label>Education</label>
+<select name="education" multiple size=2>
+	<option>10th class</option>
+	<option>MPC</option>
+	<option>Bipc</option>
+	<option disabled>CEC</option>
+	<option>HEC</option>
+	<option>CSE</option>
+	<option>Civil</option>
+	<option>Mech</option>
+	<option>ECE</option>
+	<option>EEE</option>
+	<option>MBA</option>
+	<option>MCA</option>
+</select><br/><br/>
+<label >Education</label>
+<select name="education1">
+<optgroup label="school">
+	<option>10th class</option>
+</optgroup>
+<optgroup label="inter">
+	<option>MPC</option>
+	<option>Bipc</option>
+	<option>CEC</option>
+	<option>HEC</option>
+</optgroup>
+<optgroup label="Btech" disabled>
+	<option>CSE</option>
+	<option>Civil</option>
+	<option>Mech</option>
+	<option>ECE</option>
+	<option>EEE</option>
+</optgroup>
+<optgroup label="Master's">
+	<option selected>MBA</option>
+	<option>MCA</option>
+</optgroup>
+</select><br/><br/>
+<label>Message :</label>
+<textarea name="message" rows="15" cols="25"></textarea><br/><br/>
+Student Photo :<input type="file" name="file" multiple/><br/><br/>	
+Date : <input type="date" name="data" min='2000-01-01' max="2025-11-01"/><br/><br/>
+Time :<input type="time" name="time"/><br/><br/>
+DateTime :<input type="datetime" name="datatime" /><br/><br/>
+DateTime Local :<input type="datetime-local" name="datatime" /><br/><br/>
+Week:<input type="week" name="week"/><br/><br/>
+Month : <input type="month" name="month"/><br/><br/>
+Color: <input type="color" name="color"/><br/><br/>
+Email : <input type="email" name="email" autofocus/><br/><br/>
+Number :<input type="number" name="number" min="0" max="10" step="2"/><br/><br/>
+Tel :<input type="tel" name="tel" pattern="[0-9]{10}" title="please enter valid phone number" /><br/><br/>
+Search : <input type="search" name="search" /><br/><br/>
+Url : <input type="url" name="url" required/><br/><br/>
+Range : <input type="range" name="range" min="0" max="30" step="3"/><br/><br/>
+List :<input list="browsers" name="browser">
+<datalist id="browsers">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Chrome">
+  <option value="Opera">
+  <option value="Safari">
+</datalist> <br/><br/>
+<input type="submit" formaction="https://www.pivotalsoft.com"  formmethod="get" value="@input" >
+<input type="submit"/>
+<input type="reset"/>
+<input type="button" value="Data Submit"/>
+<input type="image" src="https://e7.pngegg.com/pngimages/295/665/png-clipart-submit-button-illustration-submit-button-icons-logos-emojis-submit.png" width="55px" height="35px">
+</fieldset>
+</form>
+</body>
+</html>

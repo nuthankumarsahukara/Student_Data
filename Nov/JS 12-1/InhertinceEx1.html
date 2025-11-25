@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>To Check Output Open The Console Terminal</h3>
+    <script>
+      function Animal(name) {
+        this.name = name;
+      }
+
+      Animal.prototype.sayHello = function () {
+        console.log(`Hello, my name is ${this.name}`);
+      };
+
+      function Dog(name, breed) {
+        Animal.call(this, name); // Inherit properties from Animal
+        this.breed = breed;
+      }
+
+      // Inherit methods from Animal
+      Dog.prototype = Object.create(Animal.prototype);
+      Dog.prototype.constructor = Dog;
+
+      const dog = new Dog("Buddy", "Golden Retriever");
+      dog.sayHello();
+    </script>
+  </body>
+</html>

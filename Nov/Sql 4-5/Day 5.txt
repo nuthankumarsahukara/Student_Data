@@ -1,0 +1,159 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Tue Nov 18 16:11:19 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+
+SQL> create table dept (deptno number(3),deptname varchar2(20),constraint pk_1 primary key (deptno));
+
+Table created.
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL NUMBER(3)
+ DEPTNAME                                           VARCHAR2(20)
+
+SQL> insert into dept values(10,'HR');
+
+1 row created.
+
+SQL> insert into dept values(10,'Non IT');
+insert into dept values(10,'Non IT')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.PK_1) violated
+
+
+SQL> insert into dept values(20,'Non IT');
+
+1 row created.
+
+SQL> insert into dept values(30,'IT');
+
+1 row created.
+
+SQL> insert into dept values(40,'Markerting');
+
+1 row created.
+
+SQL> insert into dept values(50,'Sales');
+
+1 row created.
+
+SQL> select * from dept;
+
+    DEPTNO DEPTNAME
+---------- --------------------
+        10 HR
+        20 Non IT
+        30 IT
+        40 Markerting
+        50 Sales
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table dept1 (deptno number,deptname varchar2(15),deptloc varchar2(15),constraint ck_1 primary key(deptno,deptname));
+
+Table created.
+
+SQL> insert into dept1 values(10,'HR');
+insert into dept1 values(10,'HR')
+            *
+ERROR at line 1:
+ORA-00947: not enough values
+
+
+SQL> insert into dept1 values(10,'HR','Hyderabad');
+
+1 row created.
+
+SQL> insert into dept1 values(10,'Non IT','Hyderabad');
+
+1 row created.
+
+SQL> insert into dept1 values(10,'Non IT','Hyderabad');
+insert into dept1 values(10,'Non IT','Hyderabad')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.CK_1) violated
+
+
+SQL> insert into dept1 values(20,'HR','Hyderabad');
+
+1 row created.
+
+SQL> insert into dept1 values(20,'HR','Hyderabad');
+insert into dept1 values(20,'HR','Hyderabad')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.CK_1) violated
+
+
+SQL> create table emp(emp_id number(4),emp_name varchar2(20),emp_sal number(7,2),emp_dob date,deptno number(3) foreign key (deptno) references dept(deptno),constraint pk_2 primary key (emp_id));
+create table emp(emp_id number(4),emp_name varchar2(20),emp_sal number(7,2),emp_dob date,deptno number(3) foreign key (deptno) references dept(deptno),constraint pk_2 primary key (emp_id))
+                                                                                                          *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table emp(emp_id number(4),emp_name varchar2(20),emp_sal number(7,2),emp_dob date,deptno number(3), foreign key(deptno) references dept(deptno),constraint pk_2 primary key (emp_id));
+
+Table created.
+
+SQL> desc emp_id;
+ERROR:
+ORA-04043: object emp_id does not exist
+
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(4)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SAL                                            NUMBER(7,2)
+ EMP_DOB                                            DATE
+ DEPTNO                                             NUMBER(3)
+
+SQL> insert into emp values(1001,'Nuthan',18000,'20-aug-1999',10);
+
+1 row created.
+
+SQL> insert into emp values(1002,'Ganesh',15000,'31-aug-2004',20);
+
+1 row created.
+
+SQL> insert into emp values(1002,'Ganesh',15000,'31-aug-2004',20);
+insert into emp values(1002,'Ganesh',15000,'31-aug-2004',20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.PK_2) violated
+
+
+SQL> insert into emp values(1003,'Vinod',15000,'10-oct-2002',20);
+
+1 row created.
+
+SQL> insert into emp values(1004,'Sai',13000,'11-jan-2005',30);
+
+1 row created.
+
+SQL> insert into emp values(1005,'Govind',25000,'19-feb-1985',80);
+insert into emp values(1005,'Govind',25000,'19-feb-1985',80)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007011) violated - parent key not
+found
+
+
+SQL> insert into emp values(1005,'Govind',25000,'19-feb-1985',50);
+
+1 row created.
+
+SQL>

@@ -1,0 +1,702 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Nov 24 16:12:04 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> select abs(-17) from dual;
+
+  ABS(-17)
+----------
+        17
+
+SQL> select abs(17) from dual;
+
+   ABS(17)
+----------
+        17
+
+SQL> select abs(-65617) from dual;
+
+ABS(-65617)
+-----------
+      65617
+
+SQL> select acos(0) from dual;
+
+   ACOS(0)
+----------
+1.57079633
+
+SQL> select acos(0.5) from dual;
+
+ ACOS(0.5)
+----------
+1.04719755
+
+SQL> select acos(0.8) from dual;
+
+ ACOS(0.8)
+----------
+.643501109
+
+SQL> select acos(1.8) from dual;
+select acos(1.8) from dual
+            *
+ERROR at line 1:
+ORA-01428: argument '1.8' is out of range
+
+
+SQL> select asin(0.8) from dual;
+
+ ASIN(0.8)
+----------
+.927295218
+
+SQL> select asin(0.2) from dual;
+
+ ASIN(0.2)
+----------
+.201357921
+
+SQL> select atan(1.2) from dual;
+
+ ATAN(1.2)
+----------
+.876058051
+
+SQL> select atan(6) from dual;
+
+   ATAN(6)
+----------
+1.40564765
+
+SQL> select atan(8) from dual;
+
+   ATAN(8)
+----------
+1.44644133
+
+SQL> select atan2(8,6) from dual;
+
+ATAN2(8,6)
+----------
+.927295218
+
+SQL> select bitand(1110,1111);
+select bitand(1110,1111)
+                       *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select bitand(1110,1111) from dual;
+
+BITAND(1110,1111)
+-----------------
+             1110
+
+SQL> select bitand(1010,1101) from dual;
+
+BITAND(1010,1101)
+-----------------
+               64
+
+SQL> select bitand(1010,1101) from dual;
+
+BITAND(1010,1101)
+-----------------
+               64
+
+SQL> select bitand(1010,1100) from dual;
+
+BITAND(1010,1100)
+-----------------
+               64
+
+SQL> select bitand(10,13) from dual;
+
+BITAND(10,13)
+-------------
+            8
+
+SQL> select ceil(15.65) from dual;
+
+CEIL(15.65)
+-----------
+         16
+
+SQL> select ceil(15.15) from dual;
+
+CEIL(15.15)
+-----------
+         16
+
+SQL> select ceil(15.11) from dual;
+
+CEIL(15.11)
+-----------
+         16
+
+SQL> select cos(0.55) from dual;
+
+ COS(0.55)
+----------
+.852524522
+
+SQL> select celi(0.55) from dual;
+select celi(0.55) from dual
+       *
+ERROR at line 1:
+ORA-00904: "CELI": invalid identifier
+
+
+SQL> select ceil(0.55) from dual;
+
+CEIL(0.55)
+----------
+         1
+
+SQL> select cos(0.55) from dual;
+
+ COS(0.55)
+----------
+.852524522
+
+SQL> select cos(0.9) from dual;
+
+  COS(0.9)
+----------
+.621609968
+
+SQL> select cos(1) from dual;
+
+    COS(1)
+----------
+.540302306
+
+SQL> select cos(1.5) from dual;
+
+  COS(1.5)
+----------
+.070737202
+
+SQL> select cos(15) from dual;
+
+   COS(15)
+----------
+-.75968791
+
+SQL> select cos(25) from dual;
+
+   COS(25)
+----------
+.991202812
+
+SQL> select cosh(25) from dual;
+
+  COSH(25)
+----------
+3.6002E+10
+
+SQL> select cosh(5) from dual;
+
+   COSH(5)
+----------
+74.2099485
+
+SQL> select exp(2) from dual;
+
+    EXP(2)
+----------
+ 7.3890561
+
+SQL> select exp(1) from dual;
+
+    EXP(1)
+----------
+2.71828183
+
+SQL> select exp(3) from dual;
+
+    EXP(3)
+----------
+20.0855369
+
+SQL> select greatest(10,25,5,98,65,85) from dual;
+
+GREATEST(10,25,5,98,65,85)
+--------------------------
+                        98
+
+SQL> select greatest(-10,-25,-5,-98,-65,-85) from dual;
+
+GREATEST(-10,-25,-5,-98,-65,-85)
+--------------------------------
+                              -5
+
+SQL> select least(10,25,5,98,65,85) from dual;
+
+LEAST(10,25,5,98,65,85)
+-----------------------
+                      5
+
+SQL> select least(-10,-25,-5,-98,-65,-85) from dual;
+
+LEAST(-10,-25,-5,-98,-65,-85)
+-----------------------------
+                          -98
+
+SQL> select ln(3) from dual;
+
+     LN(3)
+----------
+1.09861229
+
+SQL> select log(3,2) from dual;
+
+  LOG(3,2)
+----------
+.630929754
+
+SQL> select mod(3,2) from dual;
+
+  MOD(3,2)
+----------
+         1
+
+SQL> select mod(11,2) from dual;
+
+ MOD(11,2)
+----------
+         1
+
+SQL> select mod(11,3) from dual;
+
+ MOD(11,3)
+----------
+         2
+
+SQL> select pow(11,2) from dual;
+select pow(11,2) from dual
+       *
+ERROR at line 1:
+ORA-00904: "POW": invalid identifier
+
+
+SQL> select power(11,2) from dual;
+
+POWER(11,2)
+-----------
+        121
+
+SQL> select power(11,3) from dual;
+
+POWER(11,3)
+-----------
+       1331
+
+SQL> select power(2,3) from dual;
+
+POWER(2,3)
+----------
+         8
+
+SQL> select power(2,2) from dual;
+
+POWER(2,2)
+----------
+         4
+
+SQL> select remainder(12,5) from dual;
+
+REMAINDER(12,5)
+---------------
+              2
+
+SQL> select remainder(14,5) from dual;
+
+REMAINDER(14,5)
+---------------
+             -1
+
+SQL> select round(10.26) from dual;
+
+ROUND(10.26)
+------------
+          10
+
+SQL> select round(10.66) from dual;
+
+ROUND(10.66)
+------------
+          11
+
+SQL> select round(10.662326,2) from dual;
+
+ROUND(10.662326,2)
+------------------
+             10.66
+
+SQL> select round(10.668326,2) from dual;
+
+ROUND(10.668326,2)
+------------------
+             10.67
+
+SQL> select sign(-35) from dual;
+
+ SIGN(-35)
+----------
+        -1
+
+SQL> select sign(35) from dual;
+
+  SIGN(35)
+----------
+         1
+
+SQL> select sign(0) from dual;
+
+   SIGN(0)
+----------
+         0
+
+SQL> select sign(65) from dual;
+
+  SIGN(65)
+----------
+         1
+
+SQL> select sign(-5) from dual;
+
+  SIGN(-5)
+----------
+        -1
+
+SQL> select sin(10.25) from dual;
+
+SIN(10.25)
+----------
+-.73469843
+
+SQL> select sinh(10.25) from dual;
+
+SINH(10.25)
+-----------
+ 14141.2709
+
+SQL> select sqrt(4) from dual;
+
+   SQRT(4)
+----------
+         2
+
+SQL> select sqrt(16) from dual;
+
+  SQRT(16)
+----------
+         4
+
+SQL> select sqrt(10) from dual;
+
+  SQRT(10)
+----------
+3.16227766
+
+SQL> select sqrt(1) from dual;
+
+   SQRT(1)
+----------
+         1
+
+SQL> select sqrt(2) from dual;
+
+   SQRT(2)
+----------
+1.41421356
+
+SQL> select tan(10.25) from dual;
+
+TAN(10.25)
+----------
+1.08299689
+
+SQL> select tanh(15) from dual;
+
+  TANH(15)
+----------
+         1
+
+SQL> select trunc(10.2655,2);
+select trunc(10.2655,2)
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select trunc(10.2655,2) from dual;
+
+TRUNC(10.2655,2)
+----------------
+           10.26
+
+SQL> select trunc(10.2655,1) from dual;
+
+TRUNC(10.2655,1)
+----------------
+            10.2
+
+SQL> select trunc(10.2655,3) from dual;
+
+TRUNC(10.2655,3)
+----------------
+          10.265
+
+SQL> select add_months(sysdate,5) from dual;
+
+ADD_MONTH
+---------
+24-APR-26
+
+SQL> select add_months(sysdate,24) from dual;
+
+ADD_MONTH
+---------
+24-NOV-27
+
+SQL> select add_months('01-aug-2023',24) from dual;
+
+ADD_MONTH
+---------
+01-AUG-25
+
+SQL> select add_months('01-aug-2023',2) from dual;
+
+ADD_MONTH
+---------
+01-OCT-23
+
+SQL> select current_date from dual;
+
+CURRENT_D
+---------
+24-NOV-25
+
+SQL> select current_timestamp from dual;
+
+CURRENT_TIMESTAMP
+---------------------------------------------------------------------------
+24-NOV-25 04.35.14.092000 PM +05:30
+
+SQL> select dbtimezone from dual;
+
+DBTIME
+------
++00:00
+
+SQL> SELECT EXTRACT(Month FROM DATE '1998-03-07') from dual;
+
+EXTRACT(MONTHFROMDATE'1998-03-07')
+----------------------------------
+                                 3
+
+SQL> SELECT EXTRACT(Year FROM DATE '2025-11-24') from dual;
+
+EXTRACT(YEARFROMDATE'2025-11-24')
+---------------------------------
+                             2025
+
+SQL> SELECT EXTRACT(Month FROM DATE '2025-11-24') from dual;
+
+EXTRACT(MONTHFROMDATE'2025-11-24')
+----------------------------------
+                                11
+
+SQL> SELECT EXTRACT(day FROM DATE '2025-11-24') from dual;
+
+EXTRACT(DAYFROMDATE'2025-11-24')
+--------------------------------
+                              24
+
+SQL> SELECT EXTRACT(day FROM DATE '2024-08-20') from dual;
+
+EXTRACT(DAYFROMDATE'2024-08-20')
+--------------------------------
+                              20
+
+SQL>  SELECT EXTRACT(TIMEZONE_minute FROM TIMESTAMP '1999-01-01 10:51:59 -05:30') from dual;
+
+EXTRACT(TIMEZONE_MINUTEFROMTIMESTAMP'1999-01-0110:51:59-05:30')
+---------------------------------------------------------------
+                                                            -30
+
+SQL> SELECT EXTRACT(day FROM sysdate) from dual;
+
+EXTRACT(DAYFROMSYSDATE)
+-----------------------
+                     24
+
+
+SQL>  SELECT EXTRACT(TIMEZONE_minute FROM TIMESTAMP '1999-01-01 10:51:59 -05:30') from dual;
+
+EXTRACT(TIMEZONE_MINUTEFROMTIMESTAMP'1999-01-0110:51:59-05:30')
+---------------------------------------------------------------
+                                                            -30
+
+SQL> select last_day(sysdate) from dual;
+
+LAST_DAY(
+---------
+30-NOV-25
+
+SQL> select last_day('01-dec-2025') from dual;
+
+LAST_DAY(
+---------
+31-DEC-25
+
+SQL> select localtimestamp from dual;
+
+LOCALTIMESTAMP
+---------------------------------------------------------------------------
+24-NOV-25 04.43.50.104000 PM
+
+SQL> select months_between('20-aug-1999',sysdate) from dual;
+
+MONTHS_BETWEEN('20-AUG-1999',SYSDATE)
+-------------------------------------
+                           -315.15154
+
+SQL> select months_between(sysdate,'20-aug-1999') from dual;
+
+MONTHS_BETWEEN(SYSDATE,'20-AUG-1999')
+-------------------------------------
+                           315.151546
+
+SQL> select months_between(sysdate,'20-aug-1999')/12 from dual;
+
+MONTHS_BETWEEN(SYSDATE,'20-AUG-1999')/12
+----------------------------------------
+                               26.262629
+
+SQL> select new_time(sysdate,'AST','PDT') from dual
+  2  ;
+
+NEW_TIME(
+---------
+24-NOV-25
+
+SQL> select new_time(sysdate,'AST','HST') from dual;
+
+NEW_TIME(
+---------
+24-NOV-25
+
+SQL> select next_day(sysdate,1) from dual;
+
+NEXT_DAY(
+---------
+30-NOV-25
+
+SQL> select next_day(sysdate,2) from dual;
+
+NEXT_DAY(
+---------
+01-DEC-25
+
+SQL> select next_day(sysdate,3) from dual;
+
+NEXT_DAY(
+---------
+25-NOV-25
+
+SQL> select next_day(sysdate,4) from dual;
+
+NEXT_DAY(
+---------
+26-NOV-25
+
+SQL> select round(sysdate,'YYYY') from dual;
+
+ROUND(SYS
+---------
+01-JAN-26
+
+SQL> select round(sysdate,'YY') from dual;
+
+ROUND(SYS
+---------
+01-JAN-26
+
+SQL> select round(sysdate,'mm') from dual;
+
+ROUND(SYS
+---------
+01-DEC-25
+
+SQL> select round(sysdate,'ww') from dual;
+
+ROUND(SYS
+---------
+26-NOV-25
+
+SQL> select round(sysdate,'dd') from dual;
+
+ROUND(SYS
+---------
+25-NOV-25
+
+SQL> select sessiontimezone from dual;
+
+SESSIONTIMEZONE
+---------------------------------------------------------------------------
++05:30
+
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+24-NOV-25
+
+SQL> select systimestamp from dual;
+
+SYSTIMESTAMP
+---------------------------------------------------------------------------
+24-NOV-25 04.51.52.881000 PM +05:30
+
+SQL> select trunc(sysdate) from dual;
+
+TRUNC(SYS
+---------
+24-NOV-25
+
+SQL> select tz_offset('Canada/Atlantic') from dual;
+
+TZ_OFFS
+-------
+-04:00
+
+SQL> select tz_offset('Pacific/Honolulu') from dual;
+
+TZ_OFFS
+-------
+-10:00
+
+SQL> select tz_offset('US/Central') from dual;
+
+TZ_OFFS
+-------
+-06:00
+
+SQL>

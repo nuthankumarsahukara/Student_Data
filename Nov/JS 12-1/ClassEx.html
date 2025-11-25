@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>To Check Output Open The Console Terminal</h3>
+    <script>
+        //class creation
+        class Car{
+            //Attributes or Properties
+            color="Black";
+
+            constructor(Name,Model){
+                this.Name=Name;
+                this.Model=Model;
+            }
+
+            //Methods or Behaviour
+            display(){
+                console.log("Name :"+this.Name);
+                console.log("Model :"+this.Model)
+            }
+        }
+
+        //object Calling
+
+        let myCar=new Car('Honda','City');
+        myCar.display();
+        console.log("Color :"+myCar.color);
+    </script>
+</body>
+</html>
