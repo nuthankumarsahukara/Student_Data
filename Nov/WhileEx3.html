@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<title>Reverse Number</title>
+</head>
+<body>
+<h1>Reverse Number Example</h1>
+<script>
+	let num=+(prompt('Enter the number :'));
+	let rev=0;
+	document.write('The Number is '+num+'<br/>');
+	while(num>0){
+		let rem=num%10;
+		rev=rem+rev*10;
+		num=Math.floor(num/10);
+	}
+	document.write('The Reverse Number is '+rev+'<br/>');
+</script>
+</body>
+</html>

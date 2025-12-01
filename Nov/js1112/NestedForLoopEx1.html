@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<title>Nested For Loop Example</title>
+</head>
+<body>
+<h1>Table Example in Nested For loop</h1>
+<script>
+	let start=+(prompt('Enter the starting table number '));	
+	let end=+(prompt('Enter the ending table number '));
+	for(let i=start;i<=end;i++){
+		for(let j=1;j<=12;j++){
+			document.write(i+' * '+j+' = '+(i*j)+'<br/>');
+		}
+		document.write("<br/>");
+	}
+</script>
+</body>
+</html>

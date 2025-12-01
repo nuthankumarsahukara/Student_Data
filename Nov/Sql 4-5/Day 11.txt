@@ -1,0 +1,1153 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Fri Nov 28 16:10:32 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select * from department;
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        10 Accounts
+        20 Sales
+        30 Operations
+        40 Production
+        50 Markerting
+
+SQL> select empno,ename,sal,d.deptno,d.deptname from employee,department d where employee.deptno=d.deptno;
+
+     EMPNO ENAME                       SAL     DEPTNO DEPTNAME
+---------- -------------------- ---------- ---------- ---------------
+      9999 king                       9000         10 Accounts
+      1652 John                       4800         20 Sales
+      1653 ganesh                     5000         30 Operations
+      1651 Vinod                      4300         10 Accounts
+      1701 Teja                       2500         10 Accounts
+      1702 Kumar                      2500         20 Sales
+      1703 sai                        2500         30 Operations
+      1901 Rahul                      3200         20 Sales
+      1902 smith                      3500         20 Sales
+      1903 kalyan                     2800         20 Sales
+      1904 Mahesh                     3000         20 Sales
+      1704 krishna                    2200         20 Sales
+      1705 tarun                      2100         30 Operations
+      1801 shiva                      4000         20 Sales
+      1802 satya                      4000         30 Operations
+
+15 rows selected.
+
+SQL> select empno,ename,sal,department.deptno,department.deptname from employee join department on employee.deptno=department.deptno;
+
+     EMPNO ENAME                       SAL     DEPTNO DEPTNAME
+---------- -------------------- ---------- ---------- ---------------
+      9999 king                       9000         10 Accounts
+      1652 John                       4800         20 Sales
+      1653 ganesh                     5000         30 Operations
+      1651 Vinod                      4300         10 Accounts
+      1701 Teja                       2500         10 Accounts
+      1702 Kumar                      2500         20 Sales
+      1703 sai                        2500         30 Operations
+      1901 Rahul                      3200         20 Sales
+      1902 smith                      3500         20 Sales
+      1903 kalyan                     2800         20 Sales
+      1904 Mahesh                     3000         20 Sales
+      1704 krishna                    2200         20 Sales
+      1705 tarun                      2100         30 Operations
+      1801 shiva                      4000         20 Sales
+      1802 satya                      4000         30 Operations
+
+15 rows selected.
+
+SQL> select empno,ename,sal,department.deptno,department.deptname from employee join department on employee.deptno<>department.deptno;
+
+     EMPNO ENAME                       SAL     DEPTNO DEPTNAME
+---------- -------------------- ---------- ---------- ---------------
+      1652 John                       4800         10 Accounts
+      1653 ganesh                     5000         10 Accounts
+      1702 Kumar                      2500         10 Accounts
+      1703 sai                        2500         10 Accounts
+      1901 Rahul                      3200         10 Accounts
+      1902 smith                      3500         10 Accounts
+      1903 kalyan                     2800         10 Accounts
+      1904 Mahesh                     3000         10 Accounts
+      1704 krishna                    2200         10 Accounts
+      1705 tarun                      2100         10 Accounts
+      1801 shiva                      4000         10 Accounts
+      1802 satya                      4000         10 Accounts
+      9999 king                       9000         20 Sales
+      1653 ganesh                     5000         20 Sales
+      1651 Vinod                      4300         20 Sales
+      1701 Teja                       2500         20 Sales
+      1703 sai                        2500         20 Sales
+      1705 tarun                      2100         20 Sales
+      1802 satya                      4000         20 Sales
+      9999 king                       9000         30 Operations
+      1652 John                       4800         30 Operations
+      1651 Vinod                      4300         30 Operations
+      1701 Teja                       2500         30 Operations
+      1702 Kumar                      2500         30 Operations
+      1901 Rahul                      3200         30 Operations
+      1902 smith                      3500         30 Operations
+      1903 kalyan                     2800         30 Operations
+      1904 Mahesh                     3000         30 Operations
+      1704 krishna                    2200         30 Operations
+      1801 shiva                      4000         30 Operations
+      9999 king                       9000         40 Production
+      1652 John                       4800         40 Production
+      1653 ganesh                     5000         40 Production
+      1651 Vinod                      4300         40 Production
+      1701 Teja                       2500         40 Production
+      1702 Kumar                      2500         40 Production
+      1703 sai                        2500         40 Production
+      1901 Rahul                      3200         40 Production
+      1902 smith                      3500         40 Production
+      1903 kalyan                     2800         40 Production
+      1904 Mahesh                     3000         40 Production
+      1704 krishna                    2200         40 Production
+      1705 tarun                      2100         40 Production
+      1801 shiva                      4000         40 Production
+      1802 satya                      4000         40 Production
+      9999 king                       9000         50 Markerting
+      1652 John                       4800         50 Markerting
+      1653 ganesh                     5000         50 Markerting
+      1651 Vinod                      4300         50 Markerting
+      1701 Teja                       2500         50 Markerting
+      1702 Kumar                      2500         50 Markerting
+      1703 sai                        2500         50 Markerting
+      1901 Rahul                      3200         50 Markerting
+      1902 smith                      3500         50 Markerting
+      1903 kalyan                     2800         50 Markerting
+      1904 Mahesh                     3000         50 Markerting
+      1704 krishna                    2200         50 Markerting
+      1705 tarun                      2100         50 Markerting
+      1801 shiva                      4000         50 Markerting
+      1802 satya                      4000         50 Markerting
+
+60 rows selected.
+
+SQL> select empno,ename,sal,department.deptno,department.deptname from employee join department on employee.deptno>20;
+
+     EMPNO ENAME                       SAL     DEPTNO DEPTNAME
+---------- -------------------- ---------- ---------- ---------------
+      1653 ganesh                     5000         10 Accounts
+      1653 ganesh                     5000         20 Sales
+      1653 ganesh                     5000         30 Operations
+      1653 ganesh                     5000         40 Production
+      1653 ganesh                     5000         50 Markerting
+      1703 sai                        2500         10 Accounts
+      1703 sai                        2500         20 Sales
+      1703 sai                        2500         30 Operations
+      1703 sai                        2500         40 Production
+      1703 sai                        2500         50 Markerting
+      1705 tarun                      2100         10 Accounts
+      1705 tarun                      2100         20 Sales
+      1705 tarun                      2100         30 Operations
+      1705 tarun                      2100         40 Production
+      1705 tarun                      2100         50 Markerting
+      1802 satya                      4000         10 Accounts
+      1802 satya                      4000         20 Sales
+      1802 satya                      4000         30 Operations
+      1802 satya                      4000         40 Production
+      1802 satya                      4000         50 Markerting
+
+20 rows selected.
+
+SQL> select empno,ename,sal,department.deptno,department.deptname from employee inner join department on employee.deptno=department.deptno;
+
+     EMPNO ENAME                       SAL     DEPTNO DEPTNAME
+---------- -------------------- ---------- ---------- ---------------
+      9999 king                       9000         10 Accounts
+      1652 John                       4800         20 Sales
+      1653 ganesh                     5000         30 Operations
+      1651 Vinod                      4300         10 Accounts
+      1701 Teja                       2500         10 Accounts
+      1702 Kumar                      2500         20 Sales
+      1703 sai                        2500         30 Operations
+      1901 Rahul                      3200         20 Sales
+      1902 smith                      3500         20 Sales
+      1903 kalyan                     2800         20 Sales
+      1904 Mahesh                     3000         20 Sales
+      1704 krishna                    2200         20 Sales
+      1705 tarun                      2100         30 Operations
+      1801 shiva                      4000         20 Sales
+      1802 satya                      4000         30 Operations
+
+15 rows selected.
+
+SQL> desc employee;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ EMPNO                                                                               NOT NULL NUMBER(4)
+ ENAME                                                                                        VARCHAR2(20)
+ JOB                                                                                          VARCHAR2(20)
+ MANAGER                                                                                      NUMBER(4)
+ HIREDATE                                                                                     DATE
+ SAL                                                                                          NUMBER(7,2)
+ COMM                                                                                         NUMBER(7,2)
+ DEPTNO                                                                                       NUMBER(2)
+
+SQL> insert into employee(empno,ename,job,manager) values(1501,'Ravi','Sales Intern',1652);
+
+1 row created.
+
+SQL> insert into employee(empno,ename,job,manager) values(1502,'Kiran','Sales Intern',1652);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> select ename,job,sal,d.deptno,d.deptname from employee left outer join department d on employee.deptno=d.deptno;
+
+ENAME                JOB                         SAL     DEPTNO DEPTNAME
+-------------------- -------------------- ---------- ---------- ---------------
+Teja                 clerk                      2500         10 Accounts
+Vinod                Manager                    4300         10 Accounts
+king                 CEO                        9000         10 Accounts
+shiva                analyst                    4000         20 Sales
+krishna              clerk                      2200         20 Sales
+Mahesh               salesman                   3000         20 Sales
+kalyan               salesman                   2800         20 Sales
+smith                salesman                   3500         20 Sales
+Rahul                salesman                   3200         20 Sales
+Kumar                clerk                      2500         20 Sales
+John                 Manager                    4800         20 Sales
+satya                analyst                    4000         30 Operations
+tarun                clerk                      2100         30 Operations
+sai                  clerk                      2500         30 Operations
+ganesh               Manager                    5000         30 Operations
+Kiran                Sales Intern
+Ravi                 Sales Intern
+
+17 rows selected.
+
+SQL> select ename,job,sal,d.deptno,d.deptname from employee right outer join department d on employee.deptno=d.deptno;
+
+ENAME                JOB                         SAL     DEPTNO DEPTNAME
+-------------------- -------------------- ---------- ---------- ---------------
+king                 CEO                        9000         10 Accounts
+John                 Manager                    4800         20 Sales
+ganesh               Manager                    5000         30 Operations
+Vinod                Manager                    4300         10 Accounts
+Teja                 clerk                      2500         10 Accounts
+Kumar                clerk                      2500         20 Sales
+sai                  clerk                      2500         30 Operations
+Rahul                salesman                   3200         20 Sales
+smith                salesman                   3500         20 Sales
+kalyan               salesman                   2800         20 Sales
+Mahesh               salesman                   3000         20 Sales
+krishna              clerk                      2200         20 Sales
+tarun                clerk                      2100         30 Operations
+shiva                analyst                    4000         20 Sales
+satya                analyst                    4000         30 Operations
+                                                             50 Markerting
+                                                             40 Production
+
+17 rows selected.
+
+SQL> select ename,job,sal,d.deptno,d.deptname from employee full outer join department d on employee.deptno=d.deptno;
+
+ENAME                JOB                         SAL     DEPTNO DEPTNAME
+-------------------- -------------------- ---------- ---------- ---------------
+king                 CEO                        9000         10 Accounts
+John                 Manager                    4800         20 Sales
+ganesh               Manager                    5000         30 Operations
+Vinod                Manager                    4300         10 Accounts
+Teja                 clerk                      2500         10 Accounts
+Kumar                clerk                      2500         20 Sales
+sai                  clerk                      2500         30 Operations
+Rahul                salesman                   3200         20 Sales
+smith                salesman                   3500         20 Sales
+kalyan               salesman                   2800         20 Sales
+Mahesh               salesman                   3000         20 Sales
+krishna              clerk                      2200         20 Sales
+tarun                clerk                      2100         30 Operations
+shiva                analyst                    4000         20 Sales
+satya                analyst                    4000         30 Operations
+Ravi                 Sales Intern
+Kiran                Sales Intern
+                                                             50 Markerting
+                                                             40 Production
+
+19 rows selected.
+
+SQL> select e1.ename||' Works for '||e2.ename "Employee and their Manger"  from
+  2  employee e1, employee e2 where e1.manager =e2.empno;
+
+Employee and their Manger
+---------------------------------------------------
+Vinod Works for king
+ganesh Works for king
+John Works for king
+Kiran Works for John
+Ravi Works for John
+shiva Works for John
+krishna Works for John
+Mahesh Works for John
+kalyan Works for John
+smith Works for John
+Rahul Works for John
+Kumar Works for John
+satya Works for ganesh
+tarun Works for ganesh
+sai Works for ganesh
+Teja Works for Vinod
+
+16 rows selected.
+
+SQL> select employee.*,department.deptname from employee cross join department;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO DEPTNAME
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ---------- ---------------
+      9999 king                 CEO                             25-MAY-11       9000                    10 Accounts
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20 Accounts
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30 Accounts
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10 Accounts
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10 Accounts
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20 Accounts
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30 Accounts
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20 Accounts
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20 Accounts
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20 Accounts
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20 Accounts
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20 Accounts
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30 Accounts
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20 Accounts
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30 Accounts
+      1501 Ravi                 Sales Intern               1652                                            Accounts
+      1502 Kiran                Sales Intern               1652                                            Accounts
+      9999 king                 CEO                             25-MAY-11       9000                    10 Sales
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20 Sales
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30 Sales
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10 Sales
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10 Sales
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20 Sales
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30 Sales
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20 Sales
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20 Sales
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20 Sales
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20 Sales
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20 Sales
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30 Sales
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20 Sales
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30 Sales
+      1501 Ravi                 Sales Intern               1652                                            Sales
+      1502 Kiran                Sales Intern               1652                                            Sales
+      9999 king                 CEO                             25-MAY-11       9000                    10 Operations
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20 Operations
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30 Operations
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10 Operations
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10 Operations
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20 Operations
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30 Operations
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20 Operations
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20 Operations
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20 Operations
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20 Operations
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20 Operations
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30 Operations
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20 Operations
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30 Operations
+      1501 Ravi                 Sales Intern               1652                                            Operations
+      1502 Kiran                Sales Intern               1652                                            Operations
+      9999 king                 CEO                             25-MAY-11       9000                    10 Production
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20 Production
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30 Production
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10 Production
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10 Production
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20 Production
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30 Production
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20 Production
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20 Production
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20 Production
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20 Production
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20 Production
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30 Production
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20 Production
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30 Production
+      1501 Ravi                 Sales Intern               1652                                            Production
+      1502 Kiran                Sales Intern               1652                                            Production
+      9999 king                 CEO                             25-MAY-11       9000                    10 Markerting
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20 Markerting
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30 Markerting
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10 Markerting
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10 Markerting
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20 Markerting
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30 Markerting
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20 Markerting
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20 Markerting
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20 Markerting
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20 Markerting
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20 Markerting
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30 Markerting
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20 Markerting
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30 Markerting
+      1501 Ravi                 Sales Intern               1652                                            Markerting
+      1502 Kiran                Sales Intern               1652                                            Markerting
+
+85 rows selected.
+
+SQL> select * from employee,department;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO     DEPTNO DEPTNAME
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ---------- ---------- ---------------
+      9999 king                 CEO                             25-MAY-11       9000                    10         10 Accounts
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20         10 Accounts
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30         10 Accounts
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10         10 Accounts
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10         10 Accounts
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20         10 Accounts
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30         10 Accounts
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20         10 Accounts
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20         10 Accounts
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20         10 Accounts
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20         10 Accounts
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20         10 Accounts
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30         10 Accounts
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20         10 Accounts
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30         10 Accounts
+      1501 Ravi                 Sales Intern               1652                                                    10 Accounts
+      1502 Kiran                Sales Intern               1652                                                    10 Accounts
+      9999 king                 CEO                             25-MAY-11       9000                    10         20 Sales
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20         20 Sales
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30         20 Sales
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10         20 Sales
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10         20 Sales
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20         20 Sales
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30         20 Sales
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20         20 Sales
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20         20 Sales
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20         20 Sales
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20         20 Sales
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20         20 Sales
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30         20 Sales
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20         20 Sales
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30         20 Sales
+      1501 Ravi                 Sales Intern               1652                                                    20 Sales
+      1502 Kiran                Sales Intern               1652                                                    20 Sales
+      9999 king                 CEO                             25-MAY-11       9000                    10         30 Operations
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20         30 Operations
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30         30 Operations
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10         30 Operations
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10         30 Operations
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20         30 Operations
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30         30 Operations
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20         30 Operations
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20         30 Operations
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20         30 Operations
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20         30 Operations
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20         30 Operations
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30         30 Operations
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20         30 Operations
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30         30 Operations
+      1501 Ravi                 Sales Intern               1652                                                    30 Operations
+      1502 Kiran                Sales Intern               1652                                                    30 Operations
+      9999 king                 CEO                             25-MAY-11       9000                    10         40 Production
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20         40 Production
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30         40 Production
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10         40 Production
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10         40 Production
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20         40 Production
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30         40 Production
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20         40 Production
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20         40 Production
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20         40 Production
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20         40 Production
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20         40 Production
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30         40 Production
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20         40 Production
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30         40 Production
+      1501 Ravi                 Sales Intern               1652                                                    40 Production
+      1502 Kiran                Sales Intern               1652                                                    40 Production
+      9999 king                 CEO                             25-MAY-11       9000                    10         50 Markerting
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20         50 Markerting
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30         50 Markerting
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10         50 Markerting
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10         50 Markerting
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20         50 Markerting
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30         50 Markerting
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20         50 Markerting
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20         50 Markerting
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20         50 Markerting
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20         50 Markerting
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20         50 Markerting
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30         50 Markerting
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20         50 Markerting
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30         50 Markerting
+      1501 Ravi                 Sales Intern               1652                                                    50 Markerting
+      1502 Kiran                Sales Intern               1652                                                    50 Markerting
+
+85 rows selected.
+
+SQL> select d.deptno,d.deptname from department d where not exists(select 1 from employee e where e.deptno=d.deptno) order by d.deptno;
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        40 Production
+        50 Markerting
+
+SQL> select empno,ename,job from employee where deptno not in
+  2  (select deptno from department);
+
+no rows selected
+
+SQL> select empno,ename,job,deptno from employee where deptno not in (select deptno from department);
+
+no rows selected
+
+SQL> select d.deptno,d.deptname from department d where exists(select 1 from employee e where e.deptno=d.deptno) order by d.deptno;
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        10 Accounts
+        20 Sales
+        30 Operations
+
+SQL> create view emp_data as select * from employee;
+
+View created.
+
+SQL> desc emp_data;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ EMPNO                                                                               NOT NULL NUMBER(4)
+ ENAME                                                                                        VARCHAR2(20)
+ JOB                                                                                          VARCHAR2(20)
+ MANAGER                                                                                      NUMBER(4)
+ HIREDATE                                                                                     DATE
+ SAL                                                                                          NUMBER(7,2)
+ COMM                                                                                         NUMBER(7,2)
+ DEPTNO                                                                                       NUMBER(2)
+
+SQL> select * from emp_data;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> delete from emp_data where deptno=20;
+
+8 rows deleted.
+
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+9 rows selected.
+
+SQL> select * from emp_data;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+9 rows selected.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from emp_data;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> insert into emp_data(empno,ename,job,manager) values(1503,'Ravi','Sales Intern',1652);
+
+1 row created.
+
+SQL> select * from emp_data;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+      1503 Ravi                 Sales Intern               1652
+
+18 rows selected.
+
+SQL> update emp_data set ename='Ravi Kumar' where empno=1503;
+
+1 row updated.
+
+SQL> select * from emp_data;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+      1503 Ravi Kumar           Sales Intern               1652
+
+18 rows selected.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from emp_data;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> create view view_emp as select * from employee with read only;
+
+View created.
+
+SQL> select * from view_emp;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> insert into view_emp(empno,ename,job,manager) values(1503,'Ravi','Sales Intern',1652);
+insert into view_emp(empno,ename,job,manager) values(1503,'Ravi','Sales Intern',1652)
+                     *
+ERROR at line 1:
+ORA-42399: cannot perform a DML operation on a read-only view
+
+
+SQL>
+SQL> desc dingdong;
+ERROR:
+ORA-04043: object dingdong does not exist
+
+
+SQL> create force view v2 as select * from dingdong;
+
+Warning: View created with compilation errors.
+
+SQL> desc v2;
+ERROR:
+ORA-24372: invalid object for describe
+
+
+SQL> create table dingdong (sno number(2),name varchar2(20));
+
+Table created.
+
+SQL> desc v2;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ SNO                                                                                          NUMBER(2)
+ NAME                                                                                         VARCHAR2(20)
+
+SQL> create table cars(car_id number(3),car_name varchar2(20),brand_id varchar2(20));
+
+Table created.
+
+SQL> create table brands(brand_id number(3),brand_name varchar2(20));
+
+Table created.
+
+SQL> alter table cars modify brand_id number(3);
+
+Table altered.
+
+SQL> insert into brands values(10,'Tata');
+
+1 row created.
+
+SQL> insert into brands values(20,'BMW');
+
+1 row created.
+
+SQL> insert into brands values(30,'Audi');
+
+1 row created.
+
+SQL> insert into brands values(40,'Honda');
+
+1 row created.
+
+SQL> insert into brands values(50,'MS');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into cars values(101,'Honda city',40);
+
+1 row created.
+
+SQL> insert into cars values(102,'M6',30);
+
+1 row created.
+
+SQL> insert into cars values(102,'Punch',10);
+
+1 row created.
+
+SQL> insert into cars values(104,'Altrolz',10);
+
+1 row created.
+
+SQL> insert into cars values(105,'Shift',50);
+
+1 row created.
+
+SQL> select * from cars;
+
+    CAR_ID CAR_NAME               BRAND_ID
+---------- -------------------- ----------
+       101 Honda city                   40
+       102 M6                           30
+       102 Punch                        10
+       104 Altrolz                      10
+       105 Shift                        50
+
+SQL> update cars set car_id=103 where car_name='Punch';
+
+1 row updated.
+
+SQL> select * from cars;
+
+    CAR_ID CAR_NAME               BRAND_ID
+---------- -------------------- ----------
+       101 Honda city                   40
+       102 M6                           30
+       103 Punch                        10
+       104 Altrolz                      10
+       105 Shift                        50
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create view cars_master as select car_id,car_name from cars;
+
+View created.
+
+SQL> delete from cars_master where car_id=105;
+
+1 row deleted.
+
+SQL> select * from cars;
+
+    CAR_ID CAR_NAME               BRAND_ID
+---------- -------------------- ----------
+       101 Honda city                   40
+       102 M6                           30
+       103 Punch                        10
+       104 Altrolz                      10
+
+SQL> create view all_cars as select car_id,car_name,c.brand_id,brand_name from cars c inner join brands b on b.brand_id=c.brand_id;
+
+View created.
+
+SQL> insert into all_cars(car_name,brand_id) values ('audi a5', 1);
+insert into all_cars(car_name,brand_id) values ('audi a5', 1)
+                     *
+ERROR at line 1:
+ORA-01779: cannot modify a column which maps to a non key-preserved table
+
+
+SQL> delete from all_cars where brand_name="Honda";
+delete from all_cars where brand_name="Honda"
+                                      *
+ERROR at line 1:
+ORA-00904: "Honda": invalid identifier
+
+
+SQL> select * from user_views;
+
+VIEW_NAME                      TEXT_LENGTH TEXT                                                                             TYPE_TEXT_LENGTH
+------------------------------ ----------- -------------------------------------------------------------------------------- ----------------
+TYPE_TEXT
+------------------------------------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH
+---------------
+OID_TEXT
+------------------------------------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R
+------------------------------ ------------------------------ ------------------------------ - -
+MVIEW_WORKLOAD                         436 select
+                                             a.collectionid# as workloadid,
+                                             a.collecttime as import_time,
+                                             a.quer
+
+
+
+                                                                                             N N
+
+MVIEW_FILTER                           763 select
+                                                 a.filterid# as filterid,
+                                                 a.subfilternum# as subfilternum,
+
+
+
+
+                                                                                             N N
+
+MVIEW_LOG                              596 select
+                                                 m.runid# as id,
+                                                 m.filterid# as filterid,
+                                                 m.run_begin,
+
+
+
+
+                                                                                             N N
+
+MVIEW_FILTERINSTANCE                   659 select
+                                                 a.runid# as runid,
+                                                 a.filterid# as filterid,
+                                                 a.subfilter
+
+
+
+                                                                                             N N
+
+MVIEW_RECOMMENDATIONS                  520 select
+                                             t1.runid# as runid,
+                                             t1.from_clause as all_tables,
+                                             fact_tables,
+                                             gr
+
+
+
+                                                                                             N N
+
+MVIEW_EVALUATIONS                      397 select
+                                             t1.runid# as runid,
+                                             summary_owner AS mview_owner,
+                                             summary_name AS m
+
+
+
+                                                                                             N N
+
+MVIEW_EXCEPTIONS                       269 select
+                                             t1.runid# as runid,
+                                             owner,
+                                             table_name,
+                                             dimension_name,
+                                             relation
+
+
+
+                                                                                             N N
+
+AQ$DEF$_AQCALL                        2362 SELECT q_name QUEUE, msgid MSG_ID, corrid CORR_ID, priority MSG_PRIORITY, decode
+
+
+
+                                                                                             N Y
+
+AQ$_DEF$_AQCALL_F                      988 SELECT  /*+ NO_MERGE (qo) USE_NL(qt) */ qt.q_name Q_NAME, qt.rowid ROW_ID, qt.ms
+
+
+
+                                                                                             N Y
+
+AQ$DEF$_AQERROR                       2363 SELECT q_name QUEUE, msgid MSG_ID, corrid CORR_ID, priority MSG_PRIORITY, decode
+
+
+
+                                                                                             N Y
+
+AQ$_DEF$_AQERROR_F                     989 SELECT  /*+ NO_MERGE (qo) USE_NL(qt) */ qt.q_name Q_NAME, qt.rowid ROW_ID, qt.ms
+
+
+
+                                                                                             N Y
+
+PRODUCT_PRIVS                          177 SELECT PRODUCT, USERID, ATTRIBUTE, SCOPE,
+                                                    NUMERIC_VALUE, CHAR_VALUE, DA
+
+
+
+                                                                                             N N
+
+EMP_DATA                                85 select "EMPNO","ENAME","JOB","MANAGER","HIREDATE","SAL","COMM","DEPTNO" from emp
+
+
+
+                                                                                             N N
+
+VIEW_EMP                               100 select "EMPNO","ENAME","JOB","MANAGER","HIREDATE","SAL","COMM","DEPTNO" from emp
+
+
+
+                                                                                             N Y
+
+V2                                      34 select "SNO","NAME" from dingdong
+
+
+
+                                                                                             N N
+
+CARS_MASTER                             32 select car_id,car_name from cars
+
+
+
+                                                                                             N N
+
+ALL_CARS                               101 select car_id,car_name,c.brand_id,brand_name from cars c inner join brands b on
+
+
+
+                                                                                             N N
+
+
+17 rows selected.
+
+SQL> create view tata_cars as select car_id,car_name,brand_id from cars where brand_id=10;
+
+View created.
+
+SQL> insert into tata_cars(car_name,brand_id) values('Honda Veerna',104);
+
+1 row created.
+
+SQL> select * from cars;
+
+    CAR_ID CAR_NAME               BRAND_ID
+---------- -------------------- ----------
+       101 Honda city                   40
+       102 M6                           30
+       103 Punch                        10
+       104 Altrolz                      10
+           Honda Veerna                104
+
+SQL> update tata_cars set brand_id=40 where brand_id=104;
+
+0 rows updated.
+
+SQL> select * from cars;
+
+    CAR_ID CAR_NAME               BRAND_ID
+---------- -------------------- ----------
+       101 Honda city                   40
+       102 M6                           30
+       103 Punch                        10
+       104 Altrolz                      10
+           Honda Veerna                104
+
+SQL> update tata_cars set brand_id=40 where car_name='Honda Veerna';
+
+0 rows updated.
+
+SQL> select * from tata_cars;
+
+    CAR_ID CAR_NAME               BRAND_ID
+---------- -------------------- ----------
+       103 Punch                        10
+       104 Altrolz                      10
+
+SQL> create view bmw_cars as select car_id,car_name,brand_id from cars where brand_id=20 with check option;
+
+View created.
+
+SQL> insert into bmw_cars(car_name,brand_id) values('tata harrier',10);
+insert into bmw_cars(car_name,brand_id) values('tata harrier',10)
+            *
+ERROR at line 1:
+ORA-01402: view WITH CHECK OPTION where-clause violation
+
+
+SQL> insert into bmw_cars(car_name,brand_id) values('BMW A5',20);
+
+1 row created.
+
+SQL>

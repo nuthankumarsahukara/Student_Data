@@ -1,0 +1,146 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sat Nov 29 16:07:45 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: nuthan
+Enter password:
+ERROR:
+ORA-01045: user NUTHAN lacks CREATE SESSION privilege; logon denied
+
+
+SQL> connect
+Enter user-name: nuthan
+Enter password:
+Connected.
+SQL> create table sample(sno number(2),name varchar2(25));
+
+Table created.
+
+SQL> insert into sample values(1.'Nuthan');
+insert into sample values(1.'Nuthan')
+                            *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> insert into sample values(1,'Nuthan');
+
+1 row created.
+
+SQL> select * from sample;
+
+       SNO NAME
+---------- -------------------------
+         1 Nuthan
+
+SQL> select * from employee;
+select * from employee
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from system.employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+
+17 rows selected.
+
+SQL> insert into system.employee(empno,ename,sal) values (1601,'Devi',1500);
+insert into system.employee(empno,ename,sal) values (1601,'Devi',1500)
+                   *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> insert into system.employee(empno,ename,sal) values (1601,'Devi',1500);
+
+1 row created.
+
+SQL> select * from system.employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+      1501 Ravi                 Sales Intern               1652
+      1502 Kiran                Sales Intern               1652
+      1601 Devi                                                                 1500
+
+18 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from system.employee where empno=1601;
+delete from system.employee where empno=1601
+                   *
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+SQL> delete from system.employee where empno=1601;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from system.employee where empno=1601;
+delete from system.employee where empno=1601
+                   *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from system.employee;
+select * from system.employee
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from system.employee;
+select * from system.employee
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL>

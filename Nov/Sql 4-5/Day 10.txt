@@ -1,0 +1,494 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Nov 27 16:17:54 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select * from (select ename,sal,sal*12 annusal from employee) where annusal>25000;
+
+ENAME                       SAL    ANNUSAL
+-------------------- ---------- ----------
+king                       9000     108000
+John                       4800      57600
+ganesh                     5000      60000
+Vinod                      4300      51600
+Teja                       2500      30000
+Kumar                      2500      30000
+sai                        2500      30000
+Rahul                      3200      38400
+smith                      3500      42000
+kalyan                     2800      33600
+Mahesh                     3000      36000
+krishna                    2200      26400
+tarun                      2100      25200
+shiva                      4000      48000
+satya                      4000      48000
+
+15 rows selected.
+
+SQL> select * from (select ename,sal,sal*12 annusal from employee) where annusal>35000;
+
+ENAME                       SAL    ANNUSAL
+-------------------- ---------- ----------
+king                       9000     108000
+John                       4800      57600
+ganesh                     5000      60000
+Vinod                      4300      51600
+Rahul                      3200      38400
+smith                      3500      42000
+Mahesh                     3000      36000
+shiva                      4000      48000
+satya                      4000      48000
+
+9 rows selected.
+
+SQL> select * from (select ename,sal,sal*12 annusal from employee) where annusal<35000;
+
+ENAME                       SAL    ANNUSAL
+-------------------- ---------- ----------
+Teja                       2500      30000
+Kumar                      2500      30000
+sai                        2500      30000
+kalyan                     2800      33600
+krishna                    2200      26400
+tarun                      2100      25200
+
+6 rows selected.
+
+SQL> select * from (select * from employee order by sal desc) where rownum<=5;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+
+SQL> select * from (select * from employee order by sal desc) where rownum<=5
+  2  minus
+  3  select * from (select * from employee order by sal desc) where rownum<=4;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+
+SQL> select * from (select * from employee order by sal desc) where rownum<=3
+  2  minus
+  3  select * from (select * from employee order by sal desc) where rownum<=2;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select * from (select rownum r,employee.* from employee) where r in(1,3,5,7,9);
+
+         R      EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+         1       9999 king                 CEO                             25-MAY-11       9000
+           10
+         3       1653 ganesh               Manager                    9999 02-JUN-12       5000
+           30
+         5       1701 Teja                 clerk                      1651 04-JUL-18       2500
+           10
+         7       1703 sai                  clerk                      1653 28-FEB-19       2500
+           30
+         9       1902 smith                salesman                   1652 15-MAR-15       3500       1200
+           20
+
+SQL> select * from (select rownum r,employee.* from employee) where r=1 or r=(select count(*) from employee);
+
+         R      EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+         1       9999 king                 CEO                             25-MAY-11       9000
+           10
+        15       1802 satya                analyst                    1653 02-JUL-17       4000
+           30
+
+SQL> select ename, sal, deptno from employee outer where sal>(select avg(sal) from employee where deptno=outer.deptno);
+
+ENAME                       SAL     DEPTNO
+-------------------- ---------- ----------
+king                       9000         10
+John                       4800         20
+ganesh                     5000         30
+smith                      3500         20
+shiva                      4000         20
+satya                      4000         30
+
+6 rows selected.
+
+SQL> select avg(sal) from employee;
+
+  AVG(SAL)
+----------
+3693.33333
+
+SQL> select deptno,avg(sal) from employee group by deptno;
+
+    DEPTNO   AVG(SAL)
+---------- ----------
+        30       3400
+        20       3250
+        10 5266.66667
+
+SQL> select deptno,max(sal) from employee group by deptno;
+
+    DEPTNO   MAX(SAL)
+---------- ----------
+        30       5000
+        20       4800
+        10       9000
+
+SQL> select ename, sal, deptno from employee outer where sal>(select max(sal) from employee where deptno=outer.deptno);
+
+no rows selected
+
+SQL> select ename, sal, deptno from employee outer where sal=(select max(sal) from employee where deptno=outer.deptno);
+
+ENAME                       SAL     DEPTNO
+-------------------- ---------- ----------
+king                       9000         10
+John                       4800         20
+ganesh                     5000         30
+
+SQL> select deptno,min(sal) from employee group by deptno;
+
+    DEPTNO   MIN(SAL)
+---------- ----------
+        30       2100
+        20       2200
+        10       2500
+
+SQL> select ename, sal, deptno from employee outer where sal=(select min(sal) from employee where deptno=outer.deptno);
+
+ENAME                       SAL     DEPTNO
+-------------------- ---------- ----------
+Teja                       2500         10
+krishna                    2200         20
+tarun                      2100         30
+
+SQL> select * from department;
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        10 Accounts
+        20 Sales
+        30 Operations
+        40 Production
+        50 Markerting
+
+SQL> select empno, ename, job, deptno from employee outer where exists( select 'x' from employee where manager=outer.empno);
+
+     EMPNO ENAME                JOB                      DEPTNO
+---------- -------------------- -------------------- ----------
+      9999 king                 CEO                          10
+      1651 Vinod                Manager                      10
+      1652 John                 Manager                      20
+      1653 ganesh               Manager                      30
+
+SQL> select empno, ename, job, deptno from employee outer where not exists( select 'x' from employee where manager=outer.empno);
+
+     EMPNO ENAME                JOB                      DEPTNO
+---------- -------------------- -------------------- ----------
+      1702 Kumar                clerk                        20
+      1903 kalyan               salesman                     20
+      1802 satya                analyst                      30
+      1703 sai                  clerk                        30
+      1902 smith                salesman                     20
+      1904 Mahesh               salesman                     20
+      1705 tarun                clerk                        30
+      1701 Teja                 clerk                        10
+      1901 Rahul                salesman                     20
+      1801 shiva                analyst                      20
+      1704 krishna              clerk                        20
+
+11 rows selected.
+
+SQL> select deptno,deptname from department outer where not exists( select 'x' from employee where deptno=outer.deptno);
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        50 Markerting
+        40 Production
+
+SQL> select deptno,deptname from department outer where exists( select 'x' from employee where deptno=outer.deptno);
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        10 Accounts
+        20 Sales
+        30 Operations
+
+SQL> create synonym samp for employee;
+
+Synonym created.
+
+SQL> desc samp;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ EMPNO                                                                               NOT NULL NUMBER(4)
+ ENAME                                                                                        VARCHAR2(20)
+ JOB                                                                                          VARCHAR2(20)
+ MANAGER                                                                                      NUMBER(4)
+ HIREDATE                                                                                     DATE
+ SAL                                                                                          NUMBER(7,2)
+ COMM                                                                                         NUMBER(7,2)
+ DEPTNO                                                                                       NUMBER(2)
+
+SQL> select * from samp;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> create sequence sq minvalue 1 maxvalue 5 start with 1 increment by 1;
+
+Sequence created.
+
+SQL> create synonym seq for sq;
+
+Synonym created.
+
+SQL> select sq.nextval from dual;
+
+   NEXTVAL
+----------
+         1
+
+SQL> select seq.nextval from dual;
+
+   NEXTVAL
+----------
+         2
+
+SQL> drop synonym samp;
+
+Synonym dropped.
+
+SQL> drop synonym seq;
+
+Synonym dropped.
+
+SQL> select seq.nextval from dual;
+select seq.nextval from dual
+       *
+ERROR at line 1:
+ORA-02289: sequence does not exist
+
+
+SQL> select index_name,index_type,visibility,status from all_indexes ;
+
+INDEX_NAME                     INDEX_TYPE                  VISIBILIT STATUS
+------------------------------ --------------------------- --------- --------
+XDBHI_IDX                      FUNCTION-BASED DOMAIN       VISIBLE   VALID
+XDB$ACL_XIDX                   FUNCTION-BASED DOMAIN       VISIBLE   VALID
+SYS_C007004                    NORMAL                      VISIBLE   VALID
+SYS_C007001                    NORMAL                      VISIBLE   VALID
+
+2668 rows selected.
+
+SQL> create index idx1 on employee(ename);
+
+Index created.
+
+SQL> create index idx2 on employee(sal,comm);
+
+Index created.
+
+SQL> select * from employee where ename='smith';
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+
+SQL> drop index idx1;
+
+Index dropped.
+
+SQL> drop index idx2;
+
+Index dropped.
+
+SQL> create cluster cl1 (deptno number(3));
+
+Cluster created.
+
+SQL> create index idc on cluster cl1;
+
+Index created.
+
+SQL> create table dpt(deptno number(3),dname varchar2(20)) cluster cl1(deptno);
+
+Table created.
+
+SQL> create table emp1(eno number(2),ename varchar2(20),deptno number(3))cluster cl1(deptno);
+
+Table created.
+
+SQL> insert into dpt values(10,'sales');
+
+1 row created.
+
+SQL> insert into dpt values(20,'Operation');
+
+1 row created.
+
+SQL> insert into emp1 values(1,'Nuthan',10);
+
+1 row created.
+
+SQL> insert into emp1 values(2,'Raju',10);
+
+1 row created.
+
+SQL> insert into emp1 values(3,'Ravi',20);
+
+1 row created.
+
+SQL> select * from department;
+
+    DEPTNO DEPTNAME
+---------- ---------------
+        10 Accounts
+        20 Sales
+        30 Operations
+        40 Production
+        50 Markerting
+
+SQL> select * from dept;
+select * from dept
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from dpt;
+
+    DEPTNO DNAME
+---------- --------------------
+        10 sales
+        20 Operation
+
+SQL> select * from emp1;
+
+       ENO ENAME                    DEPTNO
+---------- -------------------- ----------
+         1 Nuthan                       10
+         2 Raju                         10
+         3 Ravi                         20
+
+SQL> drop cluster cl1;
+drop cluster cl1
+*
+ERROR at line 1:
+ORA-00951: cluster not empty
+
+
+SQL> drop table dpt;
+
+Table dropped.
+
+SQL> drop table emp1;
+
+Table dropped.
+
+SQL> drop cluster cl1;
+
+Cluster dropped.
+
+SQL> drop index idc;
+drop index idc
+           *
+ERROR at line 1:
+ORA-01418: specified index does not exist
+
+
+SQL>

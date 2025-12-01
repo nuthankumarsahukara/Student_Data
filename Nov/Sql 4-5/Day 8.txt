@@ -1,0 +1,824 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Tue Nov 25 16:09:08 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> select bin_to_num(1,0,0,0) from dual;
+
+BIN_TO_NUM(1,0,0,0)
+-------------------
+                  8
+
+SQL> select bin_to_num(1,0,0,1) from dual;
+
+BIN_TO_NUM(1,0,0,1)
+-------------------
+                  9
+
+SQL> select bin_to_num(1,0,1,1) from dual;
+
+BIN_TO_NUM(1,0,1,1)
+-------------------
+                 11
+
+SQL> select bin_to_num(1,1,0,1,0) from dual;
+
+BIN_TO_NUM(1,1,0,1,0)
+---------------------
+                   26
+
+SQL> select cast('20-aug-24' as varchar2(25)) from dual;
+
+CAST('20-AUG-24'ASVARCHAR
+-------------------------
+20-aug-24
+
+SQL> select cast('20-aug-2024' as date) from dual;
+
+CAST('20-
+---------
+20-AUG-24
+
+SQL> select cast(sysdate as timestamp) from dual;
+
+CAST(SYSDATEASTIMESTAMP)
+---------------------------------------------------------------------------
+25-NOV-25 04.10.22.000000 PM
+
+SQL> select sysdate from dual;
+
+SYSDATE
+---------
+25-NOV-25
+
+SQL> select '30-aug-23',cast('30-aug-23' as date) as output_value from dual;
+
+'30-AUG-2 OUTPUT_VA
+--------- ---------
+30-aug-23 30-AUG-23
+
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select rowid from employee;
+
+ROWID
+------------------
+AAAE5hAABAAALC5AAA
+AAAE5hAABAAALC5AAB
+AAAE5hAABAAALC5AAC
+AAAE5hAABAAALC5AAD
+AAAE5hAABAAALC5AAE
+AAAE5hAABAAALC5AAF
+AAAE5hAABAAALC5AAG
+AAAE5hAABAAALC5AAH
+AAAE5hAABAAALC5AAI
+AAAE5hAABAAALC5AAJ
+AAAE5hAABAAALC5AAK
+AAAE5hAABAAALC5AAL
+AAAE5hAABAAALC5AAM
+AAAE5hAABAAALC5AAN
+AAAE5hAABAAALC5AAO
+
+15 rows selected.
+
+SQL> select * from employee where rowid='AAAE5hAABAAALC5AAJ';
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+
+SQL> select * from employee where rowid=chartorowid('AAAE5hAABAAALC5AAJ');
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+
+SQL> select from_tz(timestamp '2005-09-11 01:50:42','-7:00') from dual;
+
+FROM_TZ(TIMESTAMP'2005-09-1101:50:42','-7:00')
+---------------------------------------------------------------------------
+11-SEP-05 01.50.42.000000000 AM -07:00
+
+SQL> select hextoraw('5BC') from dual;
+
+HEXT
+----
+05BC
+
+SQL> select numtodsinterval(150,'day') from dual;
+
+NUMTODSINTERVAL(150,'DAY')
+---------------------------------------------------------------------------
++000000150 00:00:00.000000000
+
+SQL> select sysdate+numtodsinterval(150,'day') from dual;
+
+SYSDATE+N
+---------
+24-APR-26
+
+SQL> select sysdate+150 from dual;
+
+SYSDATE+1
+---------
+24-APR-26
+
+SQL> select numtodsinterval(15000,'Minute') from dual;
+
+NUMTODSINTERVAL(15000,'MINUTE')
+---------------------------------------------------------------------------
++000000010 10:00:00.000000000
+
+SQL> select numtodsinterval(15000,'Minute') from dual;
+
+NUMTODSINTERVAL(15000,'MINUTE')
+---------------------------------------------------------------------------
++000000010 10:00:00.000000000
+
+SQL> select numtodsinterval(15000,'hour') from dual;
+
+NUMTODSINTERVAL(15000,'HOUR')
+---------------------------------------------------------------------------
++000000625 00:00:00.000000000
+
+SQL> select numtodsinterval(15000,'second') from dual;
+
+NUMTODSINTERVAL(15000,'SECOND')
+---------------------------------------------------------------------------
++000000000 04:10:00.000000000
+
+SQL>    select numtoyminterval(15000,'year') from dual;
+
+NUMTOYMINTERVAL(15000,'YEAR')
+---------------------------------------------------------------------------
++000015000-00
+
+SQL> select numtoyminterval(15000,'month') from dual;
+
+NUMTOYMINTERVAL(15000,'MONTH')
+---------------------------------------------------------------------------
++000001250-00
+
+SQL> select hiredate+numtoyminterval(5,'Year') from employee;
+
+HIREDATE+
+---------
+25-MAY-16
+25-JUN-20
+02-JUN-17
+24-JAN-17
+04-JUL-23
+23-AUG-22
+28-FEB-24
+28-OCT-24
+15-MAR-20
+11-NOV-28
+11-OCT-27
+02-JUL-22
+20-AUG-24
+02-JUL-22
+02-JUL-22
+
+15 rows selected.
+
+SQL> select hiredate,hiredate+numtoyminterval(5,'year') from employee;
+
+HIREDATE  HIREDATE+
+--------- ---------
+25-MAY-11 25-MAY-16
+25-JUN-15 25-JUN-20
+02-JUN-12 02-JUN-17
+24-JAN-12 24-JAN-17
+04-JUL-18 04-JUL-23
+23-AUG-17 23-AUG-22
+28-FEB-19 28-FEB-24
+28-OCT-19 28-OCT-24
+15-MAR-15 15-MAR-20
+11-NOV-23 11-NOV-28
+11-OCT-22 11-OCT-27
+02-JUL-17 02-JUL-22
+20-AUG-19 20-AUG-24
+02-JUL-17 02-JUL-22
+02-JUL-17 02-JUL-22
+
+15 rows selected.
+
+SQL> select rawtohex('AB') from dual;
+
+RAWT
+----
+4142
+
+SQL> select to_char(78) from dual;
+
+TO
+--
+78
+
+SQL> select to_char(3456.89,'9999.9') from dual;
+
+TO_CHAR
+-------
+ 3456.9
+
+SQL> select to_char(3456.89,'$9999.99')from dual;
+
+TO_CHAR(3
+---------
+ $3456.89
+
+SQL> select to_char(3456.89,'$9,999.99')from dual;
+
+TO_CHAR(34
+----------
+ $3,456.89
+
+SQL> select to_char(sysdate,'year') from dual;
+
+TO_CHAR(SYSDATE,'YEAR')
+------------------------------------------
+twenty twenty-five
+
+SQL> select to_char(sysdate,'year month day') from dual;
+
+TO_CHAR(SYSDATE,'YEARMONTHDAY')
+--------------------------------------------------------------------------------------------------------------------
+twenty twenty-five november  tuesday
+
+SQL> select to_clob('hello world') from dual;
+
+TO_CLOB('HELLOWORLD')
+--------------------------------------------------------------------------------
+hello world
+
+SQL> select to_clob(ename) from employee;
+
+TO_CLOB(ENAME)
+--------------------------------------------------------------------------------
+king
+John
+ganesh
+Vinod
+Teja
+Kumar
+sai
+Rahul
+smith
+kalyan
+Mahesh
+krishna
+tarun
+shiva
+satya
+
+15 rows selected.
+
+SQL> select to_date('070923','ddmmyy') from dual;
+
+TO_DATE('
+---------
+07-SEP-23
+
+SQL> select to_dsinterval('100 12:30:45') from dual;
+
+TO_DSINTERVAL('10012:30:45')
+---------------------------------------------------------------------------
++000000100 12:30:45.000000000
+
+SQL> create table xyz(x long);
+
+Table created.
+
+SQL> create table abc(a clob);
+
+Table created.
+
+SQL> insert into xyz values('ABBSKVB');
+
+1 row created.
+
+SQL> insert into abc select to_lob(x) from xyz;
+
+1 row created.
+
+SQL> select * from xyz;
+
+X
+--------------------------------------------------------------------------------
+ABBSKVB
+
+SQL> select * from abc;
+
+A
+--------------------------------------------------------------------------------
+ABBSKVB
+
+SQL> select to_number('53154.86','99999.99')from dual;
+
+TO_NUMBER('53154.86','99999.99')
+--------------------------------
+                        53154.86
+
+SQL> select to_single_byte('hello') from dual;
+
+TO_SI
+-----
+hello
+
+SQL>
+SQL> select to_multi_byte('hello') from dual;
+
+TO_MULTI_BYTE('
+---------------
+hello
+
+SQL> select to_timestamp(sysdate) from dual;
+
+TO_TIMESTAMP(SYSDATE)
+---------------------------------------------------------------------------
+25-NOV-25 12.00.00 AM
+
+SQL> select to_timestamp_tz('12-jan-90 5:45:45 am +5:30') from dual;
+
+TO_TIMESTAMP_TZ('12-JAN-905:45:45AM+5:30')
+---------------------------------------------------------------------------
+12-JAN-90 05.45.45.000000000 AM +05:30
+
+SQL> select to_yminterval('9-11') from dual;
+
+TO_YMINTERVAL('9-11')
+---------------------------------------------------------------------------
++000000009-11
+
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select max(sal) from employee;
+
+  MAX(SAL)
+----------
+      9000
+
+SQL> select min(sal) from employee;
+
+  MIN(SAL)
+----------
+      2100
+
+SQL> select sum(sal) from employee;
+
+  SUM(SAL)
+----------
+     55400
+
+SQL> select avg(sal) from employee;
+
+  AVG(SAL)
+----------
+3693.33333
+
+SQL> select count(sal) from employee;
+
+COUNT(SAL)
+----------
+        15
+
+SQL> select deptno,sum(sal) from employee group by deptno;
+
+    DEPTNO   SUM(SAL)
+---------- ----------
+        30      13600
+        20      26000
+        10      15800
+
+SQL> select deptno,max(sal) from employee group by deptno;
+
+    DEPTNO   MAX(SAL)
+---------- ----------
+        30       5000
+        20       4800
+        10       9000
+
+SQL> select deptno,min(sal) from employee group by deptno;
+
+    DEPTNO   MIN(SAL)
+---------- ----------
+        30       2100
+        20       2200
+        10       2500
+
+SQL> select deptno,count(sal) from employee group by deptno;
+
+    DEPTNO COUNT(SAL)
+---------- ----------
+        30          4
+        20          8
+        10          3
+
+SQL> select stddev(sal) from employee;
+
+STDDEV(SAL)
+-----------
+ 1737.18437
+
+SQL> select variance(sal) from employee;
+
+VARIANCE(SAL)
+-------------
+   3017809.52
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Tue Nov 25 16:35:41 2025
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: system
+Enter password:
+Connected.
+SQL> set pagesize 150
+SQL> set linesize 150
+SQL> select * from employee;
+
+     EMPNO ENAME                JOB                     MANAGER HIREDATE         SAL       COMM     DEPTNO
+---------- -------------------- -------------------- ---------- --------- ---------- ---------- ----------
+      9999 king                 CEO                             25-MAY-11       9000                    10
+      1652 John                 Manager                    9999 25-JUN-15       4800                    20
+      1653 ganesh               Manager                    9999 02-JUN-12       5000                    30
+      1651 Vinod                Manager                    9999 24-JAN-12       4300                    10
+      1701 Teja                 clerk                      1651 04-JUL-18       2500                    10
+      1702 Kumar                clerk                      1652 23-AUG-17       2500                    20
+      1703 sai                  clerk                      1653 28-FEB-19       2500                    30
+      1901 Rahul                salesman                   1652 28-OCT-19       3200        950         20
+      1902 smith                salesman                   1652 15-MAR-15       3500       1200         20
+      1903 kalyan               salesman                   1652 11-NOV-23       2800        250         20
+      1904 Mahesh               salesman                   1652 11-OCT-22       3000          0         20
+      1704 krishna              clerk                      1652 02-JUL-17       2200                    20
+      1705 tarun                clerk                      1653 20-AUG-19       2100                    30
+      1801 shiva                analyst                    1652 02-JUL-17       4000                    20
+      1802 satya                analyst                    1653 02-JUL-17       4000                    30
+
+15 rows selected.
+
+SQL> select deptno,avg(sal) from employee group by deptno;
+
+    DEPTNO   AVG(SAL)
+---------- ----------
+        30       3400
+        20       3250
+        10 5266.66667
+
+SQL> select deptno,avg(sal) over (partition by deptno) from employee;
+
+    DEPTNO AVG(SAL)OVER(PARTITIONBYDEPTNO)
+---------- -------------------------------
+        10                      5266.66667
+        10                      5266.66667
+        10                      5266.66667
+        20                            3250
+        20                            3250
+        20                            3250
+        20                            3250
+        20                            3250
+        20                            3250
+        20                            3250
+        20                            3250
+        30                            3400
+        30                            3400
+        30                            3400
+        30                            3400
+
+15 rows selected.
+
+SQL> select deptno,avg(sal) over (partition by deptno order by sal) from employee;
+
+    DEPTNO AVG(SAL)OVER(PARTITIONBYDEPTNOORDERBYSAL)
+---------- -----------------------------------------
+        10                                      2500
+        10                                      3400
+        10                                5266.66667
+        20                                      2200
+        20                                      2350
+        20                                      2500
+        20                                      2625
+        20                                      2740
+        20                                2866.66667
+        20                                3028.57143
+        20                                      3250
+        30                                      2100
+        30                                      2300
+        30                                2866.66667
+        30                                      3400
+
+15 rows selected.
+
+SQL> select corr(sal,comm) from employee;
+
+CORR(SAL,COMM)
+--------------
+    .866018414
+
+SQL> select empno,ename,corr(sysdate - hiredate,sal) over () as corr_val from employee;
+
+     EMPNO ENAME                  CORR_VAL
+---------- -------------------- ----------
+      9999 king                 .696399232
+      1652 John                 .696399232
+      1653 ganesh               .696399232
+      1651 Vinod                .696399232
+      1701 Teja                 .696399232
+      1702 Kumar                .696399232
+      1703 sai                  .696399232
+      1901 Rahul                .696399232
+      1902 smith                .696399232
+      1903 kalyan               .696399232
+      1904 Mahesh               .696399232
+      1704 krishna              .696399232
+      1705 tarun                .696399232
+      1801 shiva                .696399232
+      1802 satya                .696399232
+
+15 rows selected.
+
+SQL> select empno,ename,corr(sysdate - hiredate,sal) over (partition by deptno) as corr_val from employee;
+
+     EMPNO ENAME                  CORR_VAL
+---------- -------------------- ----------
+      9999 king                 .770905975
+      1701 Teja                 .770905975
+      1651 Vinod                .770905975
+      1652 John                 .431859735
+      1801 shiva                .431859735
+      1704 krishna              .431859735
+      1904 Mahesh               .431859735
+      1702 Kumar                .431859735
+      1901 Rahul                .431859735
+      1902 smith                .431859735
+      1903 kalyan               .431859735
+      1703 sai                  .931038924
+      1705 tarun                .931038924
+      1802 satya                .931038924
+      1653 ganesh               .931038924
+
+15 rows selected.
+
+SQL> select empno,ename,dense_rank() over(partition by deptno order by sal) from employee;
+
+     EMPNO ENAME                DENSE_RANK()OVER(PARTITIONBYDEPTNOORDERBYSAL)
+---------- -------------------- ---------------------------------------------
+      1701 Teja                                                             1
+      1651 Vinod                                                            2
+      9999 king                                                             3
+      1704 krishna                                                          1
+      1702 Kumar                                                            2
+      1903 kalyan                                                           3
+      1904 Mahesh                                                           4
+      1901 Rahul                                                            5
+      1902 smith                                                            6
+      1801 shiva                                                            7
+      1652 John                                                             8
+      1705 tarun                                                            1
+      1703 sai                                                              2
+      1802 satya                                                            3
+      1653 ganesh                                                           4
+
+15 rows selected.
+
+SQL> select empno,ename,rank() over(partition by deptno order by sal) from employee;
+
+     EMPNO ENAME                RANK()OVER(PARTITIONBYDEPTNOORDERBYSAL)
+---------- -------------------- ---------------------------------------
+      1701 Teja                                                       1
+      1651 Vinod                                                      2
+      9999 king                                                       3
+      1704 krishna                                                    1
+      1702 Kumar                                                      2
+      1903 kalyan                                                     3
+      1904 Mahesh                                                     4
+      1901 Rahul                                                      5
+      1902 smith                                                      6
+      1801 shiva                                                      7
+      1652 John                                                       8
+      1705 tarun                                                      1
+      1703 sai                                                        2
+      1802 satya                                                      3
+      1653 ganesh                                                     4
+
+15 rows selected.
+
+SQL> select empno,ename,first_value(sal) ignore nulls over(partition by deptno order by sal) from employee;
+
+     EMPNO ENAME                FIRST_VALUE(SAL)IGNORENULLSOVER(PARTITIONBYDEPTNOORDERBYSAL)
+---------- -------------------- ------------------------------------------------------------
+      1701 Teja                                                                         2500
+      1651 Vinod                                                                        2500
+      9999 king                                                                         2500
+      1704 krishna                                                                      2200
+      1702 Kumar                                                                        2200
+      1903 kalyan                                                                       2200
+      1904 Mahesh                                                                       2200
+      1901 Rahul                                                                        2200
+      1902 smith                                                                        2200
+      1801 shiva                                                                        2200
+      1652 John                                                                         2200
+      1705 tarun                                                                        2100
+      1703 sai                                                                          2100
+      1802 satya                                                                        2100
+      1653 ganesh                                                                       2100
+
+15 rows selected.
+
+SQL> select empno,ename,deptno,first_value(sal) ignore nulls over(partition by deptno order by sal) from employee;
+
+     EMPNO ENAME                    DEPTNO FIRST_VALUE(SAL)IGNORENULLSOVER(PARTITIONBYDEPTNOORDERBYSAL)
+---------- -------------------- ---------- ------------------------------------------------------------
+      1701 Teja                         10                                                         2500
+      1651 Vinod                        10                                                         2500
+      9999 king                         10                                                         2500
+      1704 krishna                      20                                                         2200
+      1702 Kumar                        20                                                         2200
+      1903 kalyan                       20                                                         2200
+      1904 Mahesh                       20                                                         2200
+      1901 Rahul                        20                                                         2200
+      1902 smith                        20                                                         2200
+      1801 shiva                        20                                                         2200
+      1652 John                         20                                                         2200
+      1705 tarun                        30                                                         2100
+      1703 sai                          30                                                         2100
+      1802 satya                        30                                                         2100
+      1653 ganesh                       30                                                         2100
+
+15 rows selected.
+
+SQL> select empno,ename,deptno,last_value(sal) ignore nulls over(partition by deptno order by sal) from employee;
+
+     EMPNO ENAME                    DEPTNO LAST_VALUE(SAL)IGNORENULLSOVER(PARTITIONBYDEPTNOORDERBYSAL)
+---------- -------------------- ---------- -----------------------------------------------------------
+      1701 Teja                         10                                                        2500
+      1651 Vinod                        10                                                        4300
+      9999 king                         10                                                        9000
+      1704 krishna                      20                                                        2200
+      1702 Kumar                        20                                                        2500
+      1903 kalyan                       20                                                        2800
+      1904 Mahesh                       20                                                        3000
+      1901 Rahul                        20                                                        3200
+      1902 smith                        20                                                        3500
+      1801 shiva                        20                                                        4000
+      1652 John                         20                                                        4800
+      1705 tarun                        30                                                        2100
+      1703 sai                          30                                                        2500
+      1802 satya                        30                                                        4000
+      1653 ganesh                       30                                                        5000
+
+15 rows selected.
+
+SQL> select empno,lag(sal,1,0) over (order by sal),sal-lag(sal,1,0) over(order by sal) from employee;
+
+     EMPNO LAG(SAL,1,0)OVER(ORDERBYSAL) SAL-LAG(SAL,1,0)OVER(ORDERBYSAL)
+---------- ---------------------------- --------------------------------
+      1705                            0                             2100
+      1704                         2100                              100
+      1701                         2200                              300
+      1703                         2500                                0
+      1702                         2500                                0
+      1903                         2500                              300
+      1904                         2800                              200
+      1901                         3000                              200
+      1902                         3200                              300
+      1801                         3500                              500
+      1802                         4000                                0
+      1651                         4000                              300
+      1652                         4300                              500
+      1653                         4800                              200
+      9999                         5000                             4000
+
+15 rows selected.
+
+SQL> select empno,ename,sal,lead(sal,1,0) over (order by sal),sal-lead(sal,1,0) over(order by sal) from employee;
+
+     EMPNO ENAME                       SAL LEAD(SAL,1,0)OVER(ORDERBYSAL) SAL-LEAD(SAL,1,0)OVER(ORDERBYSAL)
+---------- -------------------- ---------- ----------------------------- ---------------------------------
+      1705 tarun                      2100                          2200                              -100
+      1704 krishna                    2200                          2500                              -300
+      1701 Teja                       2500                          2500                                 0
+      1703 sai                        2500                          2500                                 0
+      1702 Kumar                      2500                          2800                              -300
+      1903 kalyan                     2800                          3000                              -200
+      1904 Mahesh                     3000                          3200                              -200
+      1901 Rahul                      3200                          3500                              -300
+      1902 smith                      3500                          4000                              -500
+      1801 shiva                      4000                          4000                                 0
+      1802 satya                      4000                          4300                              -300
+      1651 Vinod                      4300                          4800                              -500
+      1652 John                       4800                          5000                              -200
+      1653 ganesh                     5000                          9000                             -4000
+      9999 king                       9000                             0                              9000
+
+15 rows selected.
+
+SQL> select deptno,listagg(ename,',')within group (order by ename) as employees from employee group by deptno order by deptno;
+
+    DEPTNO
+----------
+EMPLOYEES
+------------------------------------------------------------------------------------------------------------------------------------------------------
+        10
+Teja,Vinod,king
+
+        20
+John,Kumar,Mahesh,Rahul,kalyan,krishna,shiva,smith
+
+        30
+ganesh,sai,satya,tarun
+
+
+SQL> select empno,ename,deptno,nth_value(sal,3) from first over (order by sal rows between unbounded preceding and unbounded following) as third_lowest_salary,nth_value(sal,3) from last over (order by sal rows between unbounded preceding and unbounded following) as third_Highest_salary from employee;
+
+     EMPNO ENAME                    DEPTNO THIRD_LOWEST_SALARY THIRD_HIGHEST_SALARY
+---------- -------------------- ---------- ------------------- --------------------
+      1705 tarun                        30                2500                 4800
+      1704 krishna                      20                2500                 4800
+      1701 Teja                         10                2500                 4800
+      1703 sai                          30                2500                 4800
+      1702 Kumar                        20                2500                 4800
+      1903 kalyan                       20                2500                 4800
+      1904 Mahesh                       20                2500                 4800
+      1901 Rahul                        20                2500                 4800
+      1902 smith                        20                2500                 4800
+      1801 shiva                        20                2500                 4800
+      1802 satya                        30                2500                 4800
+      1651 Vinod                        10                2500                 4800
+      1652 John                         20                2500                 4800
+      1653 ganesh                       30                2500                 4800
+      9999 king                         10                2500                 4800
+
+15 rows selected.
+
+SQL> select empno,ename,deptno,nth_value(sal,5) from first over (order by sal rows between unbounded preceding and unbounded following) as five_lowest_salary,nth_value(sal,5) from last over (order by sal rows between unbounded preceding and unbounded following) as five_Highest_salary from employee;
+
+     EMPNO ENAME                    DEPTNO FIVE_LOWEST_SALARY FIVE_HIGHEST_SALARY
+---------- -------------------- ---------- ------------------ -------------------
+      1705 tarun                        30               2500                4000
+      1704 krishna                      20               2500                4000
+      1701 Teja                         10               2500                4000
+      1703 sai                          30               2500                4000
+      1702 Kumar                        20               2500                4000
+      1903 kalyan                       20               2500                4000
+      1904 Mahesh                       20               2500                4000
+      1901 Rahul                        20               2500                4000
+      1902 smith                        20               2500                4000
+      1801 shiva                        20               2500                4000
+      1802 satya                        30               2500                4000
+      1651 Vinod                        10               2500                4000
+      1652 John                         20               2500                4000
+      1653 ganesh                       30               2500                4000
+      9999 king                         10               2500                4000
+
+15 rows selected.
+
+SQL>

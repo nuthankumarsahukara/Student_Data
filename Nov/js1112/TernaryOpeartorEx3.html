@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+<title>Ternary Operator Example</title>
+</head>
+<body>
+<script>
+	let num1=+(prompt('Enter the number 1 :'));
+	let num2=+(prompt('Enter the number 2 :'));
+	let num3=+(prompt('Enter the number 3 :'));
+	let num4=+(prompt('Enter the number 4 :'));
+	let result = (num1>num2 && num1>num3 && num1>num4) ? num1 : (num2>num3 && num2>num4) ? num2 : (num3>num4) ? num3 :num4 ;
+	document.write(result+' is the biggest number among the '+num1+' '+num2+' '+num3+' '+num4); 
+</script>
+</body>
+</html>

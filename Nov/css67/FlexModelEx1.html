@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<title>Flex Example</title>
+<style>
+div div{
+	width:200px;
+	height:200px;
+}
+.start{
+	display:flex;
+	justify-content:flex-start;
+	text-align:center;
+}
+.center{
+	display:flex;
+	justify-content:center;
+	text-align:center;
+}
+.end{
+	display:flex;
+	justify-content:flex-end;
+	text-align:center;
+}
+.evenly{
+	display:flex;
+	justify-content:space-evenly;
+	text-align:center;
+}
+.between{
+	display:flex;
+	justify-content:space-between;
+	text-align:center;
+}
+.around{
+	display:flex;
+	justify-content:space-around;
+	text-align:center;
+}
+</style>
+</head>
+<body>
+<h1>justify-content:flex-start;</h1>
+<div class="start">	
+	<div style="background:red;">Box1</div>
+	<div style="background:pink;">Box2</div>
+	<div style="background:lightblue;">Box3</div>
+	<div style="background:orange;">Box4</div>
+</div>
+<h1>justify-content:center;</h1>
+<div class="center">	
+	<div style="background:red;">Box1</div>
+	<div style="background:pink;">Box2</div>
+	<div style="background:lightblue;">Box3</div>
+	<div style="background:orange;">Box4</div>
+</div>
+<h1>justify-content:flex-end;</h1>
+<div class="end">	
+	<div style="background:red;">Box1</div>
+	<div style="background:pink;">Box2</div>
+	<div style="background:lightblue;">Box3</div>
+	<div style="background:orange;">Box4</div>
+</div>
+<h1>justify-content:space-around;</h1>
+<div class="around">	
+	<div style="background:red;">Box1</div>
+	<div style="background:pink;">Box2</div>
+	<div style="background:lightblue;">Box3</div>
+	<div style="background:orange;">Box4</div>
+</div>
+<h1>justify-content:space-evenly;</h1>
+<div class="evenly">	
+	<div style="background:red;">Box1</div>
+	<div style="background:pink;">Box2</div>
+	<div style="background:lightblue;">Box3</div>
+	<div style="background:orange;">Box4</div>
+</div>
+<h1>justify-content:space-between;</h1>
+<div class="between">	
+	<div style="background:red;">Box1</div>
+	<div style="background:pink;">Box2</div>
+	<div style="background:lightblue;">Box3</div>
+	<div style="background:orange;">Box4</div>
+</div>
+</body>
+</html>

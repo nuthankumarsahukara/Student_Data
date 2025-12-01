@@ -1,0 +1,23 @@
+<!doctytpe html>
+<html>
+<head>
+<title>NestedWhileExample</title>
+</head>
+<body>
+<h1>Break in Nested While Loop Example</h1>
+<script>
+	let start=+(prompt('Enter the starting Table '));
+	let end=+(prompt('Enter the ending Table '));
+	let i=start;
+	while(i<=end){
+		let j=1;
+		while(j<=12){
+			document.write(i+' * '+j+' = '+(i*j)+'<br/>');
+			j++;	
+		}
+		document.write('<br/>');
+		i++;
+	}	
+</script>
+</body>
+</html>

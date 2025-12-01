@@ -1,0 +1,28 @@
+<!doctytpe html>
+<html>
+<head>
+<title>label WhileExample</title>
+</head>
+<body>
+<h1>Continue in Label While Loop Example</h1>
+<script>
+	let i=1;
+	sai:
+	while(i<=5){
+		let j=1;
+		kumar:
+		while(j<=3){
+			if(i==2 && j==2){
+				i++;
+				document.write('<br/>');
+				continue sai;
+			}
+			document.write(i+'   '+j+'<br/>');
+			j++;	
+		}
+		document.write('<br/>');
+		i++;
+	}	
+</script>
+</body>
+</html>
